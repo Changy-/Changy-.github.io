@@ -101,17 +101,17 @@ Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表�
 <li>This can change as the program changes</li>
 </ul>
 </blockquote>
-<div class="highlight"><pre>1   #include &lt;stdio.h&gt;
-2       intmain() {
-3       char *x = &quot;This is an example&quot;;
-4       char *y = x;
-5       printf(&quot;%p\n&quot;, y);
-6       y = NULL;
-7       printf(&quot;%p\n&quot;, y);
-8   }
+<div class="highlight"><pre>    1   #include &lt;stdio.h&gt;
+    2       intmain() {
+    3       char *x = &quot;This is an example&quot;;
+    4       char *y = x;
+    5       printf(&quot;%p\n&quot;, y);
+    6       y = NULL;
+    7       printf(&quot;%p\n&quot;, y);
+    8   }
 
-    0x1053e3f7a
-    0x0
+        0x1053e3f7a
+        0x0
 </pre></div>
 
 
@@ -191,49 +191,69 @@ Heap allocation: dynamically allocated at runtime (via mallocor similar)</p>
 熟悉C语言的同学都知道，C是值传递的(pass-by-value)，调用swap(int a,int b)并不难交换2个数。</p>
 <blockquote>
 <ul>
-<li>pass-by-name: 只有在需要的时候才赋值。
-</li>
-</ul>
-</blockquote>
-<div class="highlight"><pre>    x=[1,2,3,4,5,6,7,8,9,10]
-    i=10
-    int sum(ix,l.u,item){
-        s=0
-        for(ix=l; ix &lt;= u; ix++){
-            s=s+item
-        }
+<li>
+<p>pass-by-name: 只有在需要的时候才赋值。</p>
+<p><code>x=[1,2,3,4,5,6,7,8,9,10]
+i=10
+int sum(ix,l.u,item){
+    s=0
+    for(ix=l; ix &lt;= u; ix++){
+        s=s+item
     }
-    sum(i,1,10,x[i])
-</pre></div>
-
-
-<blockquote>
-<p>结果是55，而不是100。
+}
+sum(i,1,10,x[i])</code>
+结果是55，而不是100。
 因为x[i]并不是在传参的时候被实例化了，而是在<code>s=s+item</code>中才被赋值。</p>
-<ul>
-<li>pass-by-value:
-C语言使用的就是这个，没什么好说的。不过，在java和Python中，基本类型也是使用的这个，而高级类型（如：对象）使用的是pass-by-reference</li>
-<li>pass-by-reference: 相当于有一个指针指向了变量，在函数内部，形参改变了，实参也改变了。因为这2者是指向同一个地址的。</li>
-<li>pass-by-result:和pass-by-reference差不多，也是和实参指向同一个地址，但是，区别在于，pass-by-result的形参不能读取，只能输出。</li>
-<li>pass-by-value-resule:可以理解成copy in &amp; copy out，效果可pass-by-reference一样。</li>
+</li>
+<li>
+<p>pass-by-value:
+C语言使用的就是这个，没什么好说的。不过，在java和Python中，基本类型也是使用的这个，而高级类型（如：对象）使用的是pass-by-reference</p>
+</li>
+<li>
+<p>pass-by-reference: 相当于有一个指针指向了变量，在函数内部，形参改变了，实参也改变了。因为这2者是指向同一个地址的。</p>
+</li>
+<li>
+<p>pass-by-result:和pass-by-reference差不多，也是和实参指向同一个地址，但是，区别在于，pass-by-result的形参不能读取，只能输出。</p>
+</li>
+<li>
+<p>pass-by-value-resule:可以理解成copy in &amp; copy out，效果可pass-by-reference一样。</p>
+</li>
 </ul>
 </blockquote>
 <p>最后附上他们的优缺点：</p>
 <blockquote>
-<p>Pass-by-name
-- -Too unintuitive
-- -Parameters evaluated each use –could get expensive in a loop</p>
-<p>Pass-by-reference
-- +More efficient than copying
-- -Aliasing leads to unexpected side-effects
-- -How to handle an expression as an argument?</p>
-<p>Pass-by-value
-- +Argument protected from changes in callee
-- +No unintended side-effects
-- -Execution time and space, especially for arrays, etc.</p>
-<p>Pass-by-result
-- +Manifest interface
-- -fnfunc(a, b : int);  func(m, m);</p>
+<ul>
+<li>
+<p>Pass-by-name</p>
+<ul>
+<li>-Too unintuitive</li>
+<li>-Parameters evaluated each use –could get expensive in a loop</li>
+</ul>
+</li>
+<li>
+<p>Pass-by-reference</p>
+<ul>
+<li>+More efficient than copying</li>
+<li>-Aliasing leads to unexpected side-effects</li>
+<li>-How to handle an expression as an argument?</li>
+</ul>
+</li>
+<li>
+<p>Pass-by-value</p>
+<ul>
+<li>+Argument protected from changes in callee</li>
+<li>+No unintended side-effects</li>
+<li>-Execution time and space, especially for arrays, etc.</li>
+</ul>
+</li>
+<li>
+<p>Pass-by-result</p>
+<ul>
+<li>+Manifest interface</li>
+<li>-fnfunc(a, b : int);  func(m, m);</li>
+</ul>
+</li>
+</ul>
 </blockquote>
 <p class="subheader">Category: <a href="http://changy-.github.io/category/class_study.html">class_study</a>
 
