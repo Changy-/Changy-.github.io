@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Process</title><link>http://changy-.github.io/</link><description></description><atom:link href="http://changy-.github.io/feeds/changy.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 07 Sep 2015 22:32:00 -0400</lastBuildDate><item><title>自定义Vim配置</title><link>http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html</link><description>&lt;p&gt;配置源码都在  &lt;code&gt;https://github.com/Changy-/vim&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;贴上&lt;a href="https://github.com/Changy-/vim/blob/master/.vimrc"&gt;.vimrc&lt;/a&gt;,根据你自身情况,可以直接再这里修改,每个参数的意义也比较清楚.&lt;/p&gt;
+&lt;p&gt;如若需要修改主题,&lt;code&gt;color rainbow_neon&lt;/code&gt; 把rainbow_neon改成主题名就行了.我的源码的/colors目录下集成了很多主题,可以任意选择. 如需添加主题,将主题.vim文件copy至~/.vim/colors中,再更改.vimrc即可.
+推荐一个主题站 &lt;code&gt;http://vimcolorschemetest.googlecode.com/svn/html/index-html.html&lt;/code&gt; 作为参考&lt;/p&gt;
+&lt;p&gt;再者,在这里提醒一下,本人是再ubuntu14.04 gnome下使用该方法,由于我的terminal也有主题,故而会使得vim的主题颜色发生剧烈变化. Ps:我因此怀疑了好久自己的审美观.....  另外一种bug就是要设置为256色.
+如果你也有同样的问题,可以参考&lt;a href="http://stackoverflow.com/questions/10778078/vim-colorscheme-executing-but-not-changing-colors"&gt;here&lt;/a&gt;&lt;/p&gt;
+&lt;h2&gt;截图:&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="截图" src="https://github.com/Changy-/vim/blob/master/screenshot.png?raw=true" title="截图" /&gt;&lt;/p&gt;
+&lt;p&gt;有任何问题,欢迎在评论区提出, 或者email我: changy.smali@gmail.com&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Changy</dc:creator><pubDate>Mon, 07 Sep 2015 22:32:00 -0400</pubDate><guid>tag:changy-.github.io,2015-09-07:articles/zi-ding-yi-vimpei-zhi.html</guid><category>Vim</category></item><item><title>Just_Try</title><link>http://changy-.github.io/articles/just_try.html</link><description>&lt;div class="highlight"&gt;&lt;pre&gt;The first Markdown.
+&lt;/pre&gt;&lt;/div&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">changy</dc:creator><pubDate>Fri, 28 Aug 2015 15:35:00 -0400</pubDate><guid>tag:changy-.github.io,2015-08-28:articles/just_try.html</guid><category>other</category></item></channel></rss>
