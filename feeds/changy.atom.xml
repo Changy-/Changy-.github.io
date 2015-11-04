@@ -29,7 +29,7 @@ Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表�
 &lt;li&gt;Structured, nestablecontrol statements &lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Dynamic bounds on arrays&lt;/strong&gt;&lt;/li&gt;
 &lt;li&gt;&lt;strong&gt;Call by value&lt;/strong&gt; and &lt;strong&gt;call by name&lt;/strong&gt; for procedure parameters&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Dynamic variable lifetime&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dynamic variable lifetime&lt;/strong&gt;*&lt;/li&gt;
 &lt;li&gt;BNF –Backus-Naur Form&lt;/li&gt;
 &lt;li&gt;Recursion (and thus, &lt;strong&gt;stack-based computation model&lt;/strong&gt;)&lt;/li&gt;
 &lt;/ul&gt;
