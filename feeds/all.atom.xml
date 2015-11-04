@@ -73,8 +73,8 @@ Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表�
 &lt;/blockquote&gt;
 &lt;p&gt;总结一下：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Static binding: happens before runtime
-Dynamic binding: happens during runtime&lt;/p&gt;
+&lt;p&gt;Static binding: happens before runtime&lt;/p&gt;
+&lt;p&gt;Dynamic binding: happens during runtime&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h4&gt;&lt;strong&gt;Scope &amp;amp; Lifetime&lt;/strong&gt;&lt;/h4&gt;
 &lt;p&gt;这2个是特别容易混淆的概念。Scope是指变量有意义的范围，Lifetime就是生命周期。乍一看起来，2者是一样的，其实对不同的编程语言，有很大的区别。&lt;/p&gt;
@@ -82,6 +82,7 @@ Dynamic binding: happens during runtime&lt;/p&gt;
 &lt;li&gt;Scope&lt;/li&gt;
 &lt;/ol&gt;
 &lt;div class="highlight"&gt;&lt;pre&gt;    float pi = 3.1415927;
+
     float calc_area(float r) {
     return pi * r * r;
     }
@@ -128,29 +129,35 @@ dynamic scoping 是上下文相关的。&lt;/p&gt;
 所以，ret的lifetime比scope要大。&lt;/p&gt;
 &lt;p&gt;总结一下就是：&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;p&gt;Static allocation: statically bound to a memory address(整个run time)
-Stack allocation: local variable w/ automatic allocation
-Heap allocation: dynamically allocated at runtime (via mallocor similar)&lt;/p&gt;
+&lt;p&gt;Static allocation: statically bound to a memory address(整个run time)&lt;/p&gt;
+&lt;p&gt;Stack allocation: local variable w/ automatic allocation&lt;/p&gt;
+&lt;p&gt;Heap allocation: dynamically allocated at runtime (via mallocor similar)&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;Parameter passing&lt;/strong&gt;
 这也是很重要的概念。
 熟悉C语言的同学都知道，C是值传递的(pass-by-value)，调用swap(int a,int b)并不难交换2个数。&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;pass-by-name: 只有在需要的时候才赋值。&lt;/p&gt;
-&lt;p&gt;&lt;code&gt;x=[1,2,3,4,5,6,7,8,9,10]
-i=10
-int sum(ix,l.u,item){
-    s=0
-    for(ix=l; ix &amp;lt;= u; ix++){
-        s=s+item
-    }
-}
-sum(i,1,10,x[i])&lt;/code&gt;
-结果是55，而不是100。
-因为x[i]并不是在传参的时候被实例化了，而是在&lt;code&gt;s=s+item&lt;/code&gt;中才被赋值。&lt;/p&gt;
+&lt;li&gt;pass-by-name: 只有在需要的时候才赋值。
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;    x=[1,2,3,4,5,6,7,8,9,10]
+    i=10
+    int sum(ix,l.u,item){
+        s=0
+        for(ix=l; ix &amp;lt;= u; ix++){
+            s=s+item
+        }
+    }
+    sum(i,1,10,x[i])
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;blockquote&gt;
+&lt;p&gt;结果是55，而不是100。
+因为x[i]并不是在传参的时候被实例化了，而是在&lt;code&gt;s=s+item&lt;/code&gt;中才被赋值。&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;
 &lt;p&gt;pass-by-value:
 C语言使用的就是这个，没什么好说的。不过，在java和Python中，基本类型也是使用的这个，而高级类型（如：对象）使用的是pass-by-reference&lt;/p&gt;
@@ -167,40 +174,30 @@ C语言使用的就是这个，没什么好说的。不过，在java和Python中
 &lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;最后附上他们的优缺点：&lt;/p&gt;
-&lt;blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Pass-by-name&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;Pass-by-name&lt;ul&gt;
 &lt;li&gt;-Too unintuitive&lt;/li&gt;
 &lt;li&gt;-Parameters evaluated each use –could get expensive in a loop&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pass-by-reference&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;Pass-by-reference&lt;ul&gt;
 &lt;li&gt;+More efficient than copying&lt;/li&gt;
 &lt;li&gt;-Aliasing leads to unexpected side-effects&lt;/li&gt;
 &lt;li&gt;-How to handle an expression as an argument?&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pass-by-value&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;Pass-by-value&lt;ul&gt;
 &lt;li&gt;+Argument protected from changes in callee&lt;/li&gt;
 &lt;li&gt;+No unintended side-effects&lt;/li&gt;
 &lt;li&gt;-Execution time and space, especially for arrays, etc.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Pass-by-result&lt;/p&gt;
-&lt;ul&gt;
+&lt;li&gt;Pass-by-result&lt;ul&gt;
 &lt;li&gt;+Manifest interface&lt;/li&gt;
 &lt;li&gt;-fnfunc(a, b : int);  func(m, m);&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/blockquote&gt;</summary><category term="class"></category></entry><entry><title>自定义Vim配置</title><link href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html" rel="alternate"></link><updated>2015-09-07T22:32:00-04:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-09-07:articles/zi-ding-yi-vimpei-zhi.html</id><summary type="html">&lt;p&gt;配置源码都在  &lt;code&gt;https://github.com/Changy-/vim&lt;/code&gt;&lt;/p&gt;
+&lt;/ul&gt;</summary><category term="class"></category></entry><entry><title>自定义Vim配置</title><link href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html" rel="alternate"></link><updated>2015-09-07T22:32:00-04:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-09-07:articles/zi-ding-yi-vimpei-zhi.html</id><summary type="html">&lt;p&gt;配置源码都在  &lt;code&gt;https://github.com/Changy-/vim&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;贴上&lt;a href="https://github.com/Changy-/vim/blob/master/.vimrc"&gt;.vimrc&lt;/a&gt;,根据你自身情况,可以直接再这里修改,每个参数的意义也比较清楚.&lt;/p&gt;
 &lt;p&gt;如若需要修改主题,&lt;code&gt;color rainbow_neon&lt;/code&gt; 把rainbow_neon改成主题名就行了.我的源码的/colors目录下集成了很多主题,可以任意选择. 如需添加主题,将主题.vim文件copy至~/.vim/colors中,再更改.vimrc即可.
 推荐一个主题站 &lt;code&gt;http://vimcolorschemetest.googlecode.com/svn/html/index-html.html&lt;/code&gt; 作为参考&lt;/p&gt;
