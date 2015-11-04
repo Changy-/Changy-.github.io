@@ -54,7 +54,6 @@
 
 <h1><strong>Porgramming Language 1</strong></h1>
 <hr />
-<p>[TOC]</p>
 <h2><strong>前言</strong></h2>
 <p>刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。</p>
 <p>这一部分对应的是Fortran和Algol60。</p>
@@ -90,8 +89,8 @@ Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表�
 </blockquote>
 <p>加粗部分是比较重要的概念，像Java，Python都有用到这些方法。</p>
 <h3><strong>statement vs expression</strong></h3>
-<p>![][https://github.com/Changy-/Changy-.github.io/blob/master/images/001.PNG?raw=true]
-如果有疑问，可以参考这里：http://stackoverflow.com/questions/4728073/what-is-the-difference-between-an-expression-and-a-statement-in-python</p>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/001.PNG?raw=true" /></p>
+<p>如果有疑问，可以参考<a href="http://stackoverflow.com/questions/4728073/what-is-the-difference-between-an-expression-and-a-statement-in-python">这里</a></p>
 <h3><strong>variable</strong></h3>
 <h4><strong>Address</strong></h4>
 <blockquote>
@@ -101,17 +100,17 @@ Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表�
 <li>This can change as the program changes</li>
 </ul>
 </blockquote>
-<div class="highlight"><pre><span class="cp">#include &lt;stdio.h&gt;</span>
-<span class="n">intmain</span><span class="p">()</span> <span class="p">{</span>
-<span class="kt">char</span> <span class="o">*</span><span class="n">x</span> <span class="o">=</span> <span class="s">&quot;This is an example&quot;</span><span class="p">;</span>
-<span class="kt">char</span> <span class="o">*</span><span class="n">y</span> <span class="o">=</span> <span class="n">x</span><span class="p">;</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
-<span class="n">y</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-<span class="n">printf</span><span class="p">(</span><span class="s">&quot;%p</span><span class="se">\n</span><span class="s">&quot;</span><span class="p">,</span> <span class="n">y</span><span class="p">);</span>
-<span class="p">}</span>
+<div class="highlight"><pre>1   #include &lt;stdio.h&gt;
+2       intmain() {
+3       char *x = &quot;This is an example&quot;;
+4       char *y = x;
+5       printf(&quot;%p\n&quot;, y);
+6       y = NULL;
+7       printf(&quot;%p\n&quot;, y);
+8   }
 
-<span class="mh">0x1053e3f7a</span>
-<span class="mh">0x0</span>
+    0x1053e3f7a
+    0x0
 </pre></div>
 
 
@@ -135,45 +134,45 @@ Dynamic binding: happens during runtime</p>
 <ol>
 <li>Scope</li>
 </ol>
-<div class="highlight"><pre>float pi = 3.1415927;
-float calc_area(float r) {
-return pi * r * r;
-}
+<div class="highlight"><pre>    float pi = 3.1415927;
+    float calc_area(float r) {
+    return pi * r * r;
+    }
 </pre></div>
 
 
 <p>很显然，在<code>calc_area()</code>函数中可以知道pi的值，也就是说pi的scope包括了<code>calc_area()</code>函数。这是静态的。</p>
 <p>动态：</p>
-<div class="highlight"><pre>func f1() {
-x = 10;
-f2();
-}
-func f2() {
-print(x);
-print(z);
-}
-x = 1;
-z = 1;
-f1();
-f2();
+<div class="highlight"><pre>    func f1() {
+        x = 10;
+        f2();
+    }
+    func f2() {
+        print(x);
+        print(z);
+    }
+    x = 1;
+    z = 1;
+    f1();
+    f2();
 </pre></div>
 
 
 <p>输出结果是10,1,1,1
 dynamic scoping 是上下文相关的。</p>
 <p>流程图：
-![流程图][https://github.com/Changy-/Changy-.github.io/blob/master/images/002.PNG?raw=true]</p>
+<img alt="流程图" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/002.PNG?raw=true" /></p>
 <p>当需要x变量时，函数会不断往外寻找，这就是动态的原因。</p>
 <p>2.lifetime</p>
-<div class="highlight"><pre>char *copy(char *str) {
-inti, l;
-l = strlen(str);
-char *ret = (char *)malloc(l);
-for (i=0; i&lt;= l; i++) {
-ret[i] = str[i];
-}
-return ret;
-}
+<div class="highlight"><pre>    char *copy(char *str) {
+        inti, l;
+        l = strlen(str);
+        char *ret = (char *)malloc(l);
+        for (i=0; i&lt;= l; i++) {
+            ret[i] = str[i];
+        }
+        return ret;
+    }
 </pre></div>
 
 
@@ -192,20 +191,24 @@ Heap allocation: dynamically allocated at runtime (via mallocor similar)</p>
 <blockquote>
 <ul>
 <li>pass-by-name: 只有在需要的时候才赋值。
-```
-x=[1,2,3,4,5,6,7,8,9,10]
-i=10
-int sum(ix,l.u,item){
-    s=0
-    for(ix=l; ix &lt;= u; ix++){
-        s=s+item
-    }
-}</li>
+</li>
 </ul>
-<p>sum(i,1,10,x[i])
-<code>``
-结果是55，而不是100。
-因为x[i]并不是在传参的时候被实例化了，而是在</code>s=s+item`中才被赋值。</p>
+</blockquote>
+<div class="highlight"><pre>    x=[1,2,3,4,5,6,7,8,9,10]
+    i=10
+    int sum(ix,l.u,item){
+        s=0
+        for(ix=l; ix &lt;= u; ix++){
+            s=s+item
+        }
+    }
+    sum(i,1,10,x[i])
+</pre></div>
+
+
+<blockquote>
+<p>结果是55，而不是100。
+因为x[i]并不是在传参的时候被实例化了，而是在<code>s=s+item</code>中才被赋值。</p>
 <ul>
 <li>pass-by-value:
 C语言使用的就是这个，没什么好说的。不过，在java和Python中，基本类型也是使用的这个，而高级类型（如：对象）使用的是pass-by-reference</li>
@@ -217,19 +220,19 @@ C语言使用的就是这个，没什么好说的。不过，在java和Python中
 <p>最后附上他们的优缺点：</p>
 <blockquote>
 <p>Pass-by-name
-• -Too unintuitive
-• -Parameters evaluated each use –could get expensive in a loop
-Pass-by-reference
-• + More efficient than copying
-• -Aliasing leads to unexpected side-effects
-• -How to handle an expression as an argument?
-Pass-by-value
-• + Argument protected from changes in callee
-• + No unintended side-effects
-• -Execution time and space, especially for arrays, etc.
-Pass-by-result
-• + Manifest interface
-• -fnfunc(a, b : int);  func(m, m);</p>
+- -Too unintuitive
+- -Parameters evaluated each use –could get expensive in a loop</p>
+<p>Pass-by-reference
+- +More efficient than copying
+- -Aliasing leads to unexpected side-effects
+- -How to handle an expression as an argument?</p>
+<p>Pass-by-value
+- +Argument protected from changes in callee
+- +No unintended side-effects
+- -Execution time and space, especially for arrays, etc.</p>
+<p>Pass-by-result
+- +Manifest interface
+- -fnfunc(a, b : int);  func(m, m);</p>
 </blockquote><p class="subheader">Category: <a href="http://changy-.github.io/category/class_study.html">class_study</a>
 
     Tagged: 
