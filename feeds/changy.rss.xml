@@ -1,5 +1,183 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Process</title><link>http://changy-.github.io/</link><description></description><atom:link href="http://changy-.github.io/feeds/changy.rss.xml" rel="self"></atom:link><lastBuildDate>Mon, 07 Sep 2015 22:32:00 -0400</lastBuildDate><item><title>自定义Vim配置</title><link>http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html</link><description>&lt;p&gt;配置源码都在  &lt;code&gt;https://github.com/Changy-/vim&lt;/code&gt;&lt;/p&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Process</title><link>http://changy-.github.io/</link><description></description><atom:link href="http://changy-.github.io/feeds/changy.rss.xml" rel="self"></atom:link><lastBuildDate>Wed, 04 Nov 2015 15:46:00 -0500</lastBuildDate><item><title>Porgramming Language 1</title><link>http://changy-.github.io/articles/porgramming-language-1.html</link><description>&lt;h1&gt;&lt;strong&gt;Porgramming Language 1&lt;/strong&gt;&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;[TOC]&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。&lt;/p&gt;
+&lt;p&gt;这一部分对应的是Fortran和Algol60。&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;Fortran&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;一些重要的概念：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Functions(not subroutines)&lt;/li&gt;
+&lt;li&gt;Common blocks&lt;/li&gt;
+&lt;li&gt;Definete loops&lt;/li&gt;
+&lt;li&gt;Operateor overloading(not user-defined)&lt;/li&gt;
+&lt;li&gt;on intergers and reals&lt;/li&gt;
+&lt;li&gt;Type coersion&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;在Fortran里，二维数组是按列存储的。这点比较反人类。并且所有的数据都是静态分配的（后面会提到动态分配）。
+最重要的是理解GOTO这个关键字的意义和对后来者的影响。
+Programming 作业就是用Fortran实现一个BNF（可以理解成写正则表达式）。&lt;/p&gt;
+&lt;h2&gt;&lt;strong&gt;Algol60&lt;/strong&gt;&lt;/h2&gt;
+&lt;p&gt;这是First design-by-commitee language。&lt;/p&gt;
+&lt;p&gt;一些重要的概念：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;IF was an &lt;strong&gt;expression&lt;/strong&gt; not a statement&lt;/li&gt;
+&lt;li&gt;Block structure and &lt;strong&gt;scoping&lt;/strong&gt; rules&lt;/li&gt;
+&lt;li&gt;Structured, nestablecontrol statements &lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dynamic bounds on arrays&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Call by value&lt;/strong&gt; and &lt;strong&gt;call by name&lt;/strong&gt; for procedure parameters&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Dynamic variable lifetime&lt;/strong&gt;&lt;/li&gt;
+&lt;li&gt;BNF –Backus-Naur Form&lt;/li&gt;
+&lt;li&gt;Recursion (and thus, &lt;strong&gt;stack-based computation model&lt;/strong&gt;)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;加粗部分是比较重要的概念，像Java，Python都有用到这些方法。&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;statement vs expression&lt;/strong&gt;&lt;/h3&gt;
+&lt;p&gt;![][https://github.com/Changy-/Changy-.github.io/blob/master/images/001.PNG?raw=true]
+如果有疑问，可以参考这里：http://stackoverflow.com/questions/4728073/what-is-the-difference-between-an-expression-and-a-statement-in-python&lt;/p&gt;
+&lt;h3&gt;&lt;strong&gt;variable&lt;/strong&gt;&lt;/h3&gt;
+&lt;h4&gt;&lt;strong&gt;Address&lt;/strong&gt;&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Variables may not live at the same address&lt;/li&gt;
+&lt;li&gt;Multiple variables may share an address: aliasing&lt;/li&gt;
+&lt;li&gt;This can change as the program changes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
+&lt;span class="n"&gt;intmain&lt;/span&gt;&lt;span class="p"&gt;()&lt;/span&gt; &lt;span class="p"&gt;{&lt;/span&gt;
+&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="s"&gt;&amp;quot;This is an example&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%p&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="n"&gt;y&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt; &lt;span class="nb"&gt;NULL&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;%p&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt;&lt;span class="p"&gt;,&lt;/span&gt; &lt;span class="n"&gt;y&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+
+&lt;span class="mh"&gt;0x1053e3f7a&lt;/span&gt;
+&lt;span class="mh"&gt;0x0&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;熟悉c的同学这段代码应该没问题的。&lt;/p&gt;
+&lt;h4&gt;&lt;strong&gt;Binding&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;绑定，在这里指的是变量和内存地址的绑定，主要分为3个阶段：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;compile time: 一些全局变量或者const等&lt;/li&gt;
+&lt;li&gt;load time：静态变量。 我自己理解这里花了很长的时间，不太懂load time是哪一段时间，看了下wiki：https://en.wikipedia.org/wiki/Run_time_(program_lifecycle_phase) 才明白的，简而言之，load time就是运行程序时，程序在内存中，这个时候，loader会扫描程序，分配地址，一切完成后，程序才运行，就到了run time。&lt;/li&gt;
+&lt;li&gt;run time：这里比较复杂，有些语言是stack allocation的，在函数中的变量就会不断的绑定和销毁。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;总结一下：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Static binding: happens before runtime
+Dynamic binding: happens during runtime&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;h4&gt;&lt;strong&gt;Scope &amp;amp; Lifetime&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;这2个是特别容易混淆的概念。Scope是指变量有意义的范围，Lifetime就是生命周期。乍一看起来，2者是一样的，其实对不同的编程语言，有很大的区别。&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Scope&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;float pi = 3.1415927;
+float calc_area(float r) {
+return pi * r * r;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;很显然，在&lt;code&gt;calc_area()&lt;/code&gt;函数中可以知道pi的值，也就是说pi的scope包括了&lt;code&gt;calc_area()&lt;/code&gt;函数。这是静态的。&lt;/p&gt;
+&lt;p&gt;动态：&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;func f1() {
+x = 10;
+f2();
+}
+func f2() {
+print(x);
+print(z);
+}
+x = 1;
+z = 1;
+f1();
+f2();
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;输出结果是10,1,1,1
+dynamic scoping 是上下文相关的。&lt;/p&gt;
+&lt;p&gt;流程图：
+![流程图][https://github.com/Changy-/Changy-.github.io/blob/master/images/002.PNG?raw=true]&lt;/p&gt;
+&lt;p&gt;当需要x变量时，函数会不断往外寻找，这就是动态的原因。&lt;/p&gt;
+&lt;p&gt;2.lifetime&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;char *copy(char *str) {
+inti, l;
+l = strlen(str);
+char *ret = (char *)malloc(l);
+for (i=0; i&amp;lt;= l; i++) {
+ret[i] = str[i];
+}
+return ret;
+}
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;对于这段代码，copy()函数结束后，变量ret就销毁了吗？
+并不是这样的。ret是通过malloc得来的，此时，ret并不是存在stack中，而是存在heap中。（不太懂得同学可以参考&lt;a href="http://gribblelab.org/CBootcamp/7_Memory_Stack_vs_Heap.html"&gt;这里&lt;/a&gt;或者百度，上面有很多解释。）这样，只有programmer调用free时，ret变量才会被内存销毁。
+所以，ret的lifetime比scope要大。&lt;/p&gt;
+&lt;p&gt;总结一下就是：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Static allocation: statically bound to a memory address(整个run time)
+Stack allocation: local variable w/ automatic allocation
+Heap allocation: dynamically allocated at runtime (via mallocor similar)&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;Parameter passing&lt;/strong&gt;
+这也是很重要的概念。
+熟悉C语言的同学都知道，C是值传递的(pass-by-value)，调用swap(int a,int b)并不难交换2个数。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;pass-by-name: 只有在需要的时候才赋值。
+```
+x=[1,2,3,4,5,6,7,8,9,10]
+i=10
+int sum(ix,l.u,item){
+    s=0
+    for(ix=l; ix &amp;lt;= u; ix++){
+        s=s+item
+    }
+}&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;sum(i,1,10,x[i])
+&lt;code&gt;``
+结果是55，而不是100。
+因为x[i]并不是在传参的时候被实例化了，而是在&lt;/code&gt;s=s+item`中才被赋值。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pass-by-value:
+C语言使用的就是这个，没什么好说的。不过，在java和Python中，基本类型也是使用的这个，而高级类型（如：对象）使用的是pass-by-reference&lt;/li&gt;
+&lt;li&gt;pass-by-reference: 相当于有一个指针指向了变量，在函数内部，形参改变了，实参也改变了。因为这2者是指向同一个地址的。&lt;/li&gt;
+&lt;li&gt;pass-by-result:和pass-by-reference差不多，也是和实参指向同一个地址，但是，区别在于，pass-by-result的形参不能读取，只能输出。&lt;/li&gt;
+&lt;li&gt;pass-by-value-resule:可以理解成copy in &amp;amp; copy out，效果可pass-by-reference一样。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;最后附上他们的优缺点：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Pass-by-name
+• -Too unintuitive
+• -Parameters evaluated each use –could get expensive in a loop
+Pass-by-reference
+• + More efficient than copying
+• -Aliasing leads to unexpected side-effects
+• -How to handle an expression as an argument?
+Pass-by-value
+• + Argument protected from changes in callee
+• + No unintended side-effects
+• -Execution time and space, especially for arrays, etc.
+Pass-by-result
+• + Manifest interface
+• -fnfunc(a, b : int);  func(m, m);&lt;/p&gt;
+&lt;/blockquote&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Changy</dc:creator><pubDate>Wed, 04 Nov 2015 15:46:00 -0500</pubDate><guid>tag:changy-.github.io,2015-11-04:articles/porgramming-language-1.html</guid><category>class</category></item><item><title>自定义Vim配置</title><link>http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html</link><description>&lt;p&gt;配置源码都在  &lt;code&gt;https://github.com/Changy-/vim&lt;/code&gt;&lt;/p&gt;
 &lt;p&gt;贴上&lt;a href="https://github.com/Changy-/vim/blob/master/.vimrc"&gt;.vimrc&lt;/a&gt;,根据你自身情况,可以直接再这里修改,每个参数的意义也比较清楚.&lt;/p&gt;
 &lt;p&gt;如若需要修改主题,&lt;code&gt;color rainbow_neon&lt;/code&gt; 把rainbow_neon改成主题名就行了.我的源码的/colors目录下集成了很多主题,可以任意选择. 如需添加主题,将主题.vim文件copy至~/.vim/colors中,再更改.vimrc即可.
 推荐一个主题站 &lt;code&gt;http://vimcolorschemetest.googlecode.com/svn/html/index-html.html&lt;/code&gt; 作为参考&lt;/p&gt;
