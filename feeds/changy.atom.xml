@@ -1,5 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/changy.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-11-04T15:46:00-05:00</updated><entry><title>Porgramming Language 1</title><link href="http://changy-.github.io/articles/porgramming-language-1.html" rel="alternate"></link><updated>2015-11-04T15:46:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-11-04:articles/porgramming-language-1.html</id><summary type="html">&lt;h1&gt;&lt;strong&gt;Porgramming Language 1&lt;/strong&gt;&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/changy.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-11-06T10:32:00-05:00</updated><entry><title>Programming language 2</title><link href="http://changy-.github.io/articles/programming-language-2.html" rel="alternate"></link><updated>2015-11-06T10:32:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-11-06:articles/programming-language-2.html</id><summary type="html">&lt;h1&gt;&lt;strong&gt;Programming Language 2&lt;/strong&gt;&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;h2&gt;前言&lt;/h2&gt;
+&lt;p&gt;刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。&lt;/p&gt;
+&lt;p&gt;这一部分对应的是Algol68和Python里的一些特性。&lt;/p&gt;
+&lt;h2&gt;Referfence &amp;amp; Value&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;x=x+2&lt;/code&gt;,这个赋值中x是int型，按照我们的理解是把x的值加上2再赋值给x。然而，这只是现代的编程语言高度抽象化后的结果。
+&lt;code&gt;int x&lt;/code&gt;，表示我们申明了一个整型，name是x。在Algol68中，这表示的是x是指向int的引用。
+&lt;code&gt;x=x+2&lt;/code&gt;，右边的x会deref，从引用变为int，然后相加，最后x再指向这个int值。&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/003.png?raw=true" /&gt;&lt;/p&gt;
+&lt;p&gt;最后，y=2，x=5。
+在这个图中，&lt;code&gt;r:=3&lt;/code&gt;,3是int值，而左边的r是引用，指向的是x，也可以理解成 ref ref int类型。最后一个问题，z会不断deref，直到找到int值。&lt;/p&gt;
+&lt;h2&gt;Array&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;维度：
+在数组中，类型变得不重要了，反而维度很重要。相同的维度，他们就是相同的。
+[1:100,1:n] real 与 [1:10,7:11] int  是相同的。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动态数组：
+&lt;code&gt;Flex [1:0] int obj&lt;/code&gt;数组长度为0，动态的，当赋值的时候才确定长度。&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;Structure&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;mode bin_tree = struct(int data, REFbin_tree l_child, r_child)&lt;/code&gt;支持递归定义。&lt;/p&gt;
+&lt;h2&gt;Union&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;mode combine = UNION(int,bool)&lt;/code&gt;
+&lt;code&gt;combine x&lt;/code&gt;，这里，x可以是int也可以时bool型&lt;/p&gt;
+&lt;h2&gt;Expression&lt;/h2&gt;
+&lt;p&gt;&lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/004.png?raw=true" /&gt;&lt;/p&gt;
+&lt;h2&gt;Iterator&lt;/h2&gt;
+&lt;p&gt;迭代器是个好东西！！！！！
+参考&lt;a href="https://en.wikipedia.org/wiki/Iterator"&gt;这里&lt;/a&gt;。
+&lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/005.png?raw=true" /&gt;&lt;/p&gt;</summary><category term="class"></category></entry><entry><title>Porgramming Language 1</title><link href="http://changy-.github.io/articles/porgramming-language-1.html" rel="alternate"></link><updated>2015-11-04T15:46:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-11-04:articles/porgramming-language-1.html</id><summary type="html">&lt;h1&gt;&lt;strong&gt;Porgramming Language 1&lt;/strong&gt;&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2&gt;&lt;strong&gt;前言&lt;/strong&gt;&lt;/h2&gt;
 &lt;p&gt;刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。&lt;/p&gt;
