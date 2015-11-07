@@ -1,5 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Process</title><link>http://changy-.github.io/</link><description></description><atom:link href="http://changy-.github.io/feeds/changy.rss.xml" rel="self"></atom:link><lastBuildDate>Fri, 06 Nov 2015 10:32:00 -0500</lastBuildDate><item><title>Programming language 2</title><link>http://changy-.github.io/articles/programming-language-2.html</link><description>&lt;h1&gt;&lt;strong&gt;Programming Language 2&lt;/strong&gt;&lt;/h1&gt;
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Process</title><link>http://changy-.github.io/</link><description></description><atom:link href="http://changy-.github.io/feeds/changy.rss.xml" rel="self"></atom:link><lastBuildDate>Sat, 07 Nov 2015 18:27:00 -0500</lastBuildDate><item><title>Ubuntu 14.04 编译wireshark source</title><link>http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html</link><description>&lt;h1&gt;Ubuntu 14.04 编译wireshark source&lt;/h1&gt;
+&lt;hr /&gt;
+&lt;p&gt;由于通过&lt;code&gt;apt-get install wireshark&lt;/code&gt;安装的wireshark版本比较旧，不支持BLE协议。所以，得下载源代码进行编译。&lt;/p&gt;
+&lt;p&gt;1.下载wireshark的源代码
+2.安装必要的依赖库&lt;code&gt;sudo apt-get build-dep wireshark&lt;/code&gt;
+3.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;cd wireshark
+./configure
+make -j8
+make install
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;然而，大部分情况下，这样是会有错误的。尤其是在&lt;code&gt;./configure&lt;/code&gt;后，会报缺少一些库，这个时候可以根据缺少的库，一个个的安装。&lt;/p&gt;
+&lt;p&gt;我的情况下是缺少qt相关的库，google后，还是不能解决：qt is not found 或者 can't find uci.
+可以参考：&lt;a href="http://stackoverflow.com/questions/25965807/qt-is-not-available-error-while-compiling-a-wireshark-1-12"&gt;qt is not found&lt;/a&gt;，&lt;a href="https://ask.wireshark.org/questions/28105/qt-not-available-error"&gt;Qt not available error?&lt;/a&gt;
+我有尝试&lt;code&gt;apt-get install qt5-default&lt;/code&gt;和&lt;code&gt;apt-get install qt4-default&lt;/code&gt;，最后依然报错。&lt;/p&gt;
+&lt;p&gt;最终，看到了这个&lt;a href="https://community.gns3.com/community/forum/blog/2015/01/21/how-to-build-wireshark-1123-from-scratch-in-ubuntu"&gt;使用GTK安装wireshark&lt;/a&gt;，安装qt会有各种错误，使用这个后，很顺利的安装成功了。&lt;/p&gt;
+&lt;p&gt;对于报qt错的同学，可以参考下这个&lt;a href="https://www.howtoinstall.co/en/ubuntu/utopic/universe/wireshark-qt/"&gt;这个&lt;/a&gt;&lt;/p&gt;</description><dc:creator xmlns:dc="http://purl.org/dc/elements/1.1/">Changy</dc:creator><pubDate>Sat, 07 Nov 2015 18:27:00 -0500</pubDate><guid>tag:changy-.github.io,2015-11-07:articles/ubuntu-1404-bian-yi-wireshark-source.html</guid><category>wireshark</category></item><item><title>Programming language 2</title><link>http://changy-.github.io/articles/programming-language-2.html</link><description>&lt;h1&gt;&lt;strong&gt;Programming Language 2&lt;/strong&gt;&lt;/h1&gt;
 &lt;hr /&gt;
 &lt;h2&gt;前言&lt;/h2&gt;
 &lt;p&gt;刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。&lt;/p&gt;

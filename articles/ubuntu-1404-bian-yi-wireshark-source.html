@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Process - tools</title>
+    <title>Ubuntu 14.04 编译wireshark source</title>
 
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/foundation.min.css" />
@@ -43,16 +43,17 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
-        
-        
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html" rel="bookmark"
+        title="Permalink to Ubuntu 14.04 编译wireshark source">Ubuntu 14.04 编译wireshark source</a></h3>
+    </header>
 
-            <article>
-                <a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html"><h3 class="article-title">Ubuntu 14.04 编译wireshark source</h3></a>
 <h6 class="subheader" title="2015-11-07T18:27:00-05:00">2015-11-07
 </h6>
 
 
-<h1>Ubuntu 14.04 编译wireshark source</h1>
+    <h1>Ubuntu 14.04 编译wireshark source</h1>
 <hr />
 <p>由于通过<code>apt-get install wireshark</code>安装的wireshark版本比较旧，不支持BLE协议。所以，得下载源代码进行编译。</p>
 <p>1.下载wireshark的源代码
@@ -70,7 +71,8 @@ make install
 可以参考：<a href="http://stackoverflow.com/questions/25965807/qt-is-not-available-error-while-compiling-a-wireshark-1-12">qt is not found</a>，<a href="https://ask.wireshark.org/questions/28105/qt-not-available-error">Qt not available error?</a>
 我有尝试<code>apt-get install qt5-default</code>和<code>apt-get install qt4-default</code>，最后依然报错。</p>
 <p>最终，看到了这个<a href="https://community.gns3.com/community/forum/blog/2015/01/21/how-to-build-wireshark-1123-from-scratch-in-ubuntu">使用GTK安装wireshark</a>，安装qt会有各种错误，使用这个后，很顺利的安装成功了。</p>
-<p>对于报qt错的同学，可以参考下这个<a href="https://www.howtoinstall.co/en/ubuntu/utopic/universe/wireshark-qt/">这个</a></p><p class="subheader">Category: <a href="http://changy-.github.io/category/tools.html">tools</a>
+<p>对于报qt错的同学，可以参考下这个<a href="https://www.howtoinstall.co/en/ubuntu/utopic/universe/wireshark-qt/">这个</a></p>
+<p class="subheader">Category: <a href="http://changy-.github.io/category/tools.html">tools</a>
 
     Tagged: 
     <a href="http://changy-.github.io/tag/wireshark.html">wireshark </a>
@@ -78,42 +80,22 @@ make install
 
 
 
-<p><a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html#disqus_thread">comments</a></p>            </article>
 
+	<h4>Comments</h4>
+    <div id="disqus_thread"></div>
+    <script type="text/javascript">
+        var disqus_shortname = 'changy'
+        var disqus_identifier = "articles/ubuntu-1404-bian-yi-wireshark-source.html";
+        var disqus_url = "http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html";
 
-                <hr  class="gradient"/>
-
-
-        
-
-
-            <article>
-                <a href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html"><h3 class="article-title">自定义Vim配置</h3></a>
-<h6 class="subheader" title="2015-09-07T22:32:00-04:00">2015-09-07
-</h6>
-
-
-<p>配置源码都在 <code>https://github.com/Changy-/vim</code></p><p class="subheader">Category: <a href="http://changy-.github.io/category/tools.html">tools</a>
-
-    Tagged: 
-    <a href="http://changy-.github.io/tag/vim.html">Vim </a>
-</p>
-
-
-
-<p><a href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html">Read More</a>
-                <hr  class="gradient"/>
-            </article>
-
-            <!-- /#posts-list -->
-<div class="pagination-centered">
-<h6 class="subheader">Page 1 of 1</h6>
-
-<p>
-
-</p>
-</div>
-
+        (function() {
+            var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+            dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
+            (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+        })();
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</article>
     </div>
     <!-- End Main Content -->
 

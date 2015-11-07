@@ -47,46 +47,53 @@
         
 
             <article>
+                <a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html"><h3 class="article-title">Ubuntu 14.04 编译wireshark source</h3></a>
+<h6 class="subheader" title="2015-11-07T18:27:00-05:00">2015-11-07
+</h6>
+
+
+<h1>Ubuntu 14.04 编译wireshark source</h1>
+<hr />
+<p>由于通过<code>apt-get install wireshark</code>安装的wireshark版本比较旧，不支持BLE协议。所以，得下载源代码进行编译。</p>
+<p>1.下载wireshark的源代码
+2.安装必要的依赖库<code>sudo apt-get build-dep wireshark</code>
+3.</p>
+<div class="highlight"><pre>cd wireshark
+./configure
+make -j8
+make install
+</pre></div>
+
+
+<p>然而，大部分情况下，这样是会有错误的。尤其是在<code>./configure</code>后，会报缺少一些库，这个时候可以根据缺少的库，一个个的安装。</p>
+<p>我的情况下是缺少qt相关的库，google后，还是不能解决：qt is not found 或者 can't find uci.
+可以参考：<a href="http://stackoverflow.com/questions/25965807/qt-is-not-available-error-while-compiling-a-wireshark-1-12">qt is not found</a>，<a href="https://ask.wireshark.org/questions/28105/qt-not-available-error">Qt not available error?</a>
+我有尝试<code>apt-get install qt5-default</code>和<code>apt-get install qt4-default</code>，最后依然报错。</p>
+<p>最终，看到了这个<a href="https://community.gns3.com/community/forum/blog/2015/01/21/how-to-build-wireshark-1123-from-scratch-in-ubuntu">使用GTK安装wireshark</a>，安装qt会有各种错误，使用这个后，很顺利的安装成功了。</p>
+<p>对于报qt错的同学，可以参考下这个<a href="https://www.howtoinstall.co/en/ubuntu/utopic/universe/wireshark-qt/">这个</a></p><p class="subheader">Category: <a href="http://changy-.github.io/category/tools.html">tools</a>
+
+    Tagged: 
+    <a href="http://changy-.github.io/tag/wireshark.html">wireshark </a>
+</p>
+
+
+
+<p><a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html#disqus_thread">comments</a></p>            </article>
+
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
                 <a href="http://changy-.github.io/articles/programming-language-2.html"><h3 class="article-title">Programming language 2</h3></a>
 <h6 class="subheader" title="2015-11-06T10:32:00-05:00">2015-11-06
 </h6>
 
 
-<h1><strong>Programming Language 2</strong></h1>
-<hr />
-<h2>前言</h2>
-<p>刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。</p>
-<p>这一部分对应的是Algol68和Python里的一些特性。</p>
-<h2>Referfence &amp; Value</h2>
-<p><code>x=x+2</code>,这个赋值中x是int型，按照我们的理解是把x的值加上2再赋值给x。然而，这只是现代的编程语言高度抽象化后的结果。
-<code>int x</code>，表示我们申明了一个整型，name是x。在Algol68中，这表示的是x是指向int的引用。
-<code>x=x+2</code>，右边的x会deref，从引用变为int，然后相加，最后x再指向这个int值。</p>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/003.png?raw=true" /></p>
-<p>最后，y=2，x=5。
-在这个图中，<code>r:=3</code>,3是int值，而左边的r是引用，指向的是x，也可以理解成 ref ref int类型。最后一个问题，z会不断deref，直到找到int值。</p>
-<h2>Array</h2>
-<ul>
-<li>
-<p>维度：
-在数组中，类型变得不重要了，反而维度很重要。相同的维度，他们就是相同的。
-[1:100,1:n] real 与 [1:10,7:11] int  是相同的。</p>
-</li>
-<li>
-<p>动态数组：
-<code>Flex [1:0] int obj</code>数组长度为0，动态的，当赋值的时候才确定长度。</p>
-</li>
-</ul>
-<h2>Structure</h2>
-<p><code>mode bin_tree = struct(int data, REFbin_tree l_child, r_child)</code>支持递归定义。</p>
-<h2>Union</h2>
-<p><code>mode combine = UNION(int,bool)</code>
-<code>combine x</code>，这里，x可以是int也可以时bool型</p>
-<h2>Expression</h2>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/004.png?raw=true" /></p>
-<h2>Iterator</h2>
-<p>迭代器是个好东西！！！！！
-参考<a href="https://en.wikipedia.org/wiki/Iterator">这里</a>。
-<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/005.png?raw=true" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/class_study.html">class_study</a>
+<p>刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。</p><p class="subheader">Category: <a href="http://changy-.github.io/category/class_study.html">class_study</a>
 
     Tagged: 
     <a href="http://changy-.github.io/tag/class.html">class </a>
@@ -94,11 +101,9 @@
 
 
 
-<p><a href="http://changy-.github.io/articles/programming-language-2.html#disqus_thread">comments</a></p>            </article>
-
-
+<p><a href="http://changy-.github.io/articles/programming-language-2.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://changy-.github.io/articles/programming-language-2.html">Read More</a>
                 <hr  class="gradient"/>
-
+            </article>
 
         
 

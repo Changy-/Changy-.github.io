@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Process</title>
+    <title>Process - wireshark</title>
 
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/foundation.min.css" />
@@ -43,33 +43,54 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
+        
+        
 
-<h3>Archives</h3>
+            <article>
+                <a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html"><h3 class="article-title">Ubuntu 14.04 编译wireshark source</h3></a>
+<h6 class="subheader" title="2015-11-07T18:27:00-05:00">2015-11-07
+</h6>
 
-<table class="table-archive">
-    <tbody>
-        <tr>
-        <td>2015-11-07</td>
-        <td><a href='articles/ubuntu-1404-bian-yi-wireshark-source.html'>Ubuntu 14.04 编译wireshark source</a></td>
-        </tr>
-        <tr>
-        <td>2015-11-06</td>
-        <td><a href='articles/programming-language-2.html'>Programming language 2</a></td>
-        </tr>
-        <tr>
-        <td>2015-11-04</td>
-        <td><a href='articles/porgramming-language-1.html'>Porgramming Language 1</a></td>
-        </tr>
-        <tr>
-        <td>2015-09-07</td>
-        <td><a href='articles/zi-ding-yi-vimpei-zhi.html'>自定义Vim配置</a></td>
-        </tr>
-        <tr>
-        <td>2015-08-28</td>
-        <td><a href='articles/just_try.html'>Just_Try</a></td>
-        </tr>
-    </tbody>
-</table>
+
+<h1>Ubuntu 14.04 编译wireshark source</h1>
+<hr />
+<p>由于通过<code>apt-get install wireshark</code>安装的wireshark版本比较旧，不支持BLE协议。所以，得下载源代码进行编译。</p>
+<p>1.下载wireshark的源代码
+2.安装必要的依赖库<code>sudo apt-get build-dep wireshark</code>
+3.</p>
+<div class="highlight"><pre>cd wireshark
+./configure
+make -j8
+make install
+</pre></div>
+
+
+<p>然而，大部分情况下，这样是会有错误的。尤其是在<code>./configure</code>后，会报缺少一些库，这个时候可以根据缺少的库，一个个的安装。</p>
+<p>我的情况下是缺少qt相关的库，google后，还是不能解决：qt is not found 或者 can't find uci.
+可以参考：<a href="http://stackoverflow.com/questions/25965807/qt-is-not-available-error-while-compiling-a-wireshark-1-12">qt is not found</a>，<a href="https://ask.wireshark.org/questions/28105/qt-not-available-error">Qt not available error?</a>
+我有尝试<code>apt-get install qt5-default</code>和<code>apt-get install qt4-default</code>，最后依然报错。</p>
+<p>最终，看到了这个<a href="https://community.gns3.com/community/forum/blog/2015/01/21/how-to-build-wireshark-1123-from-scratch-in-ubuntu">使用GTK安装wireshark</a>，安装qt会有各种错误，使用这个后，很顺利的安装成功了。</p>
+<p>对于报qt错的同学，可以参考下这个<a href="https://www.howtoinstall.co/en/ubuntu/utopic/universe/wireshark-qt/">这个</a></p><p class="subheader">Category: <a href="http://changy-.github.io/category/tools.html">tools</a>
+
+    Tagged: 
+    <a href="http://changy-.github.io/tag/wireshark.html">wireshark </a>
+</p>
+
+
+
+<p><a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html#disqus_thread">comments</a></p>            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->
