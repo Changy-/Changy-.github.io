@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://changy-.github.io/</loc>
-<lastmod>2015-12-26T10:59:23-00:00</lastmod>
+<lastmod>2015-12-26T15:26:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/archives.html</loc>
-<lastmod>2015-12-26T10:59:23-00:00</lastmod>
+<lastmod>2015-12-26T15:26:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/tags.html</loc>
-<lastmod>2015-12-26T10:59:23-00:00</lastmod>
+<lastmod>2015-12-26T15:26:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/categories.html</loc>
-<lastmod>2015-12-26T10:59:23-00:00</lastmod>
+<lastmod>2015-12-26T15:26:24-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
@@ -41,6 +41,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://changy-.github.io/articles/just_try.html</loc>
 <lastmod>2015-08-28T15:35:00-04:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>1</priority>
+</url>
+
+<url>
+<loc>http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html</loc>
+<lastmod>2015-12-26T10:57:00-05:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>1</priority>
 </url>
@@ -81,6 +88,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://changy-.github.io/category/os.html</loc>
+<lastmod>2015-12-26T10:57:00-04:56</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
 <loc>http://changy-.github.io/category/tools.html</loc>
 <lastmod>2015-11-07T18:27:00-04:56</lastmod>
 <changefreq>daily</changefreq>
@@ -102,6 +116,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
+<loc>http://changy-.github.io/tag/class.html</loc>
+<lastmod>2015-11-06T10:32:00-04:56</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
 <loc>http://changy-.github.io/tag/vim.html</loc>
 <lastmod>2015-09-07T22:32:00-04:56</lastmod>
 <changefreq>daily</changefreq>
@@ -109,8 +130,8 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 </url>
 
 <url>
-<loc>http://changy-.github.io/tag/class.html</loc>
-<lastmod>2015-11-06T10:32:00-04:56</lastmod>
+<loc>http://changy-.github.io/tag/system.html</loc>
+<lastmod>2015-12-26T10:57:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
@@ -124,7 +145,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://changy-.github.io/author/changy.html</loc>
-<lastmod>2015-11-07T18:27:00-04:56</lastmod>
+<lastmod>2015-12-26T10:57:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>

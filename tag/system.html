@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Process</title>
+    <title>Process - system</title>
 
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/foundation.min.css" />
@@ -43,30 +43,68 @@
 
     <!-- Main Blog Content -->
     <div class="large-9 columns">
+        
+        
 
-<ul class="circle">
-	<li><a href="http://changy-.github.io/tag/class.html">class</a></li>
-	<ul class="square">
-	<li><a href="http://changy-.github.io/articles/porgramming-language-1.html"><small>Porgramming Language 1</small></li>
-	<li><a href="http://changy-.github.io/articles/programming-language-2.html"><small>Programming language 2</small></li>
-	</ul>
-	<li><a href="http://changy-.github.io/tag/other.html">other</a></li>
-	<ul class="square">
-	<li><a href="http://changy-.github.io/articles/just_try.html"><small>Just_Try</small></li>
-	</ul>
-	<li><a href="http://changy-.github.io/tag/system.html">system</a></li>
-	<ul class="square">
-	<li><a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html"><small>中断 && 异常 && 系统调用</small></li>
-	</ul>
-	<li><a href="http://changy-.github.io/tag/vim.html">Vim</a></li>
-	<ul class="square">
-	<li><a href="http://changy-.github.io/articles/zi-ding-yi-vimpei-zhi.html"><small>自定义Vim配置</small></li>
-	</ul>
-	<li><a href="http://changy-.github.io/tag/wireshark.html">wireshark</a></li>
-	<ul class="square">
-	<li><a href="http://changy-.github.io/articles/ubuntu-1404-bian-yi-wireshark-source.html"><small>Ubuntu 14.04 编译wireshark source</small></li>
-	</ul>
-</ul>
+            <article>
+                <a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html"><h3 class="article-title">中断 && 异常 && 系统调用</h3></a>
+<h6 class="subheader" title="2015-12-26T10:57:00-05:00">2015-12-26
+</h6>
+
+
+<h1>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</h1>
+<h3>基本概念</h3>
+<p>操作系统需要两种CPU状态:
+ 内核态(Kernel Mode)：运行操作系统程序
+ 用户态(User Mode)：运行用户程序</p>
+<p>用户态 → 内核态
+- 唯一途径 → 中断/异常/陷入机制</p>
+<p>内核态 → 用户态
+- 设置程序状态字PSW</p>
+<p>系统调用就属于第二种. (访管指令)</p>
+<h3>中断和异常</h3>
+<p>中断和异常是操作系统的驱动.</p>
+<p>中断(外中断), 是外部事件,导致硬件的中断:
+- I/O 中断
+- 时钟中断
+- 硬件故障</p>
+<p>异常(内中断), 是由CPU运行的指令而产生的:
+- 系统调用
+- 页故障
+- 保护性异常
+- 断点指令(调试程序)
+- 其他</p>
+<p>示意图如下:
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:24:15.png?raw=true" /></p>
+<p>可以看出,最关键是的如何使用向量表找到中断程序的入口地址.
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:28:07.png?raw=true" /></p>
+<p>通过GDT找到段基址,通过IDT找到偏移量,这样就可以知道中断程序的入口地址了.</p>
+<h3>系统调用</h3>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:39:22.png?raw=true" /></p>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:48:54.png?raw=true" /></p>
+<p>这是write(1,"hello",7)的汇编代码,可以看到,通过压栈存储所有的变量,然后执行int 0x80 产生系统调用.
+最后,举一个linux中系统调用的例子:
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:52:07.png?raw=true" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
+
+    Tagged: 
+    <a href="http://changy-.github.io/tag/system.html">system </a>
+</p>
+
+
+
+<p><a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html#disqus_thread">comments</a></p>            </article>
+
+<div class="pagination-centered">
+<h6 class="subheader">Page 1 of 1</h6>
+
+<p>
+
+</p>
+</div>
+
+
+
+            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->

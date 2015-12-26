@@ -4,7 +4,7 @@
     <!-- Set the viewport width to device width for mobile -->
     <meta name="viewport" content="width=device-width" />
 
-    <title>Programming language 2</title>
+    <title>中断 && 异常 && 系统调用</title>
 
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/normalize.css" />
     <link rel="stylesheet" href="http://changy-.github.io/theme/css/foundation.min.css" />
@@ -45,53 +45,51 @@
     <div class="large-9 columns">
 <article>
     <header>
-        <h3 class="article-title"><a href="http://changy-.github.io/articles/programming-language-2.html" rel="bookmark"
-        title="Permalink to Programming language 2">Programming language 2</a></h3>
+        <h3 class="article-title"><a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html" rel="bookmark"
+        title="Permalink to 中断 && 异常 && 系统调用">中断 && 异常 && 系统调用</a></h3>
     </header>
 
-<h6 class="subheader" title="2015-11-06T10:32:00-05:00">2015-11-06
+<h6 class="subheader" title="2015-12-26T10:57:00-05:00">2015-12-26
 </h6>
 
 
-    <h1><strong>Programming Language 2</strong></h1>
-<hr />
-<h2>前言</h2>
-<p>刚刚结束这门课的期中考试，老师讲课内容很深，考试也很难，并且提高了自己对编程语言的理解，有必要做一个记录。</p>
-<p>这一部分对应的是Algol68和Python里的一些特性。</p>
-<h2>Referfence &amp; Value</h2>
-<p><code>x=x+2</code>,这个赋值中x是int型，按照我们的理解是把x的值加上2再赋值给x。然而，这只是现代的编程语言高度抽象化后的结果。
-<code>int x</code>，表示我们申明了一个整型，name是x。在Algol68中，这表示的是x是指向int的引用。
-<code>x=x+2</code>，右边的x会deref，从引用变为int，然后相加，最后x再指向这个int值。</p>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/003.png?raw=true" /></p>
-<p>最后，y=2，x=5。
-在这个图中，<code>r:=3</code>,3是int值，而左边的r是引用，指向的是x，也可以理解成 ref ref int类型。最后一个问题，z会不断deref，直到找到int值。</p>
-<h2>Array</h2>
-<ul>
-<li>
-<p>维度：
-在数组中，类型变得不重要了，反而维度很重要。相同的维度，他们就是相同的。
-[1:100,1:n] real 与 [1:10,7:11] int  是相同的。</p>
-</li>
-<li>
-<p>动态数组：
-<code>Flex [1:0] int obj</code>数组长度为0，动态的，当赋值的时候才确定长度。</p>
-</li>
-</ul>
-<h2>Structure</h2>
-<p><code>mode bin_tree = struct(int data, REFbin_tree l_child, r_child)</code>支持递归定义。</p>
-<h2>Union</h2>
-<p><code>mode combine = UNION(int,bool)</code>
-<code>combine x</code>，这里，x可以是int也可以时bool型</p>
-<h2>Expression</h2>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/004.png?raw=true" /></p>
-<h2>Iterator</h2>
-<p>迭代器是个好东西！！！！！
-参考<a href="https://en.wikipedia.org/wiki/Iterator">这里</a>。
-<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/005.png?raw=true" /></p>
-<p class="subheader">Category: <a href="http://changy-.github.io/category/class_study.html">class_study</a>
+    <h1>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</h1>
+<h3>基本概念</h3>
+<p>操作系统需要两种CPU状态:
+ 内核态(Kernel Mode)：运行操作系统程序
+ 用户态(User Mode)：运行用户程序</p>
+<p>用户态 → 内核态
+- 唯一途径 → 中断/异常/陷入机制</p>
+<p>内核态 → 用户态
+- 设置程序状态字PSW</p>
+<p>系统调用就属于第二种. (访管指令)</p>
+<h3>中断和异常</h3>
+<p>中断和异常是操作系统的驱动.</p>
+<p>中断(外中断), 是外部事件,导致硬件的中断:
+- I/O 中断
+- 时钟中断
+- 硬件故障</p>
+<p>异常(内中断), 是由CPU运行的指令而产生的:
+- 系统调用
+- 页故障
+- 保护性异常
+- 断点指令(调试程序)
+- 其他</p>
+<p>示意图如下:
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:24:15.png?raw=true" /></p>
+<p>可以看出,最关键是的如何使用向量表找到中断程序的入口地址.
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:28:07.png?raw=true" /></p>
+<p>通过GDT找到段基址,通过IDT找到偏移量,这样就可以知道中断程序的入口地址了.</p>
+<h3>系统调用</h3>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:39:22.png?raw=true" /></p>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:48:54.png?raw=true" /></p>
+<p>这是write(1,"hello",7)的汇编代码,可以看到,通过压栈存储所有的变量,然后执行int 0x80 产生系统调用.
+最后,举一个linux中系统调用的例子:
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:52:07.png?raw=true" /></p>
+<p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
 
     Tagged: 
-    <a href="http://changy-.github.io/tag/class.html">class </a>
+    <a href="http://changy-.github.io/tag/system.html">system </a>
 </p>
 
 
@@ -101,8 +99,8 @@
     <div id="disqus_thread"></div>
     <script type="text/javascript">
         var disqus_shortname = 'changy'
-        var disqus_identifier = "articles/programming-language-2.html";
-        var disqus_url = "http://changy-.github.io/articles/programming-language-2.html";
+        var disqus_identifier = "articles/zhong-duan-yi-chang-xi-tong-diao-yong.html";
+        var disqus_url = "http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html";
 
         (function() {
             var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
