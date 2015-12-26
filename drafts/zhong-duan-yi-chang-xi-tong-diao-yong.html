@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<head>
+    <meta charset="utf-8" />
+    <!-- Set the viewport width to device width for mobile -->
+    <meta name="viewport" content="width=device-width" />
+
+    <title>中断 && 异常 && 系统调用</title>
+
+    <link rel="stylesheet" href="http://changy-.github.io/theme/css/normalize.css" />
+    <link rel="stylesheet" href="http://changy-.github.io/theme/css/foundation.min.css" />
+    <link rel="stylesheet" href="http://changy-.github.io/theme/css/style.css" />
+    <link rel="stylesheet" href="http://changy-.github.io/theme/css/pygments.css" />	
+    <script src="http://changy-.github.io/theme/js/modernizr.js"></script>
+</head>
+
+<body>
+
+<!-- Nav Bar -->
+<nav>
+<div class="top-bar">
+<div class="row">
+    <div class="large-9 large-centered columns">
+	    <h1><a href="http://changy-.github.io">Process</a></h1>
+    </div>
+</div>
+</div>
+
+<!-- Show menu items and pages -->
+<div class="row">
+<div class="large-9 columns">
+    <ul class="button-group navigation">
+
+            <li><a href="http://changy-.github.io/pages/about-me.html" class="button secondary small">About Me</a></li>
+    </ul>
+</div>
+</div>
+</nav>
+<!-- End Nav -->
+
+
+<!-- Main Page Content and Sidebar -->
+<div class="row">
+
+    <!-- Main Blog Content -->
+    <div class="large-9 columns">
+<article>
+    <header>
+        <h3 class="article-title"><a href="http://changy-.github.io/drafts/zhong-duan-yi-chang-xi-tong-diao-yong.html" rel="bookmark"
+        title="Permalink to 中断 && 异常 && 系统调用">中断 && 异常 && 系统调用</a></h3>
+    </header>
+
+<h6 class="subheader" title="2015-12-26T10:57:00-05:00">2015-12-26
+</h6>
+
+
+    <h1>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</h1>
+<h3>基本概念</h3>
+<p>操作系统需要两种CPU状态:
+ 内核态(Kernel Mode)：运行操作系统程序
+ 用户态(User Mode)：运行用户程序</p>
+<p>用户态 → 内核态
+- 唯一途径 → 中断/异常/陷入机制</p>
+<p>内核态 → 用户态
+- 设置程序状态字PSW</p>
+<p>系统调用就属于第二种. (访管指令)</p>
+<h3>中断和异常</h3>
+<p>中断和异常是操作系统的驱动.</p>
+<p>中断(外中断), 是外部事件,导致硬件的中断:
+- I/O 中断
+- 时钟中断
+- 硬件故障</p>
+<p>异常(内中断), 是由CPU运行的指令而产生的:
+- 系统调用
+- 页故障
+- 保护性异常
+- 断点指令(调试程序)
+- 其他</p>
+<p>示意图如下:
+<img alt="" src="http://" /></p>
+<p>可以看出,最关键是的如何使用向量表找到中断程序的入口地址.
+<img alt="" src="http://" /></p>
+<p>通过GDT找到段基址,通过IDT找到偏移量,这样就可以知道中断程序的入口地址了.</p>
+<h3>系统调用</h3>
+<p><img alt="" src="http://" /></p>
+<p><img alt="" src="http://" /></p>
+<p>这是write(1,"hello",7)的汇编代码,可以看到,通过压栈存储所有的变量,然后执行int 0x80 产生系统调用.
+最后,举一个linux中系统调用的例子:
+<img alt="" src="http://" /></p>
+<p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
+
+    Tagged: 
+    <a href="http://changy-.github.io/tag/system.html">system </a>
+</p>
+
+
+
+
+</article>
+    </div>
+    <!-- End Main Content -->
+
+    <!-- Sidebar -->
+    <aside class="large-3 columns">
+        <h5 class="sidebar-title">Site</h5>
+        <ul class="side-nav">
+            <li><a href="http://changy-.github.io/archives.html">Archives</a>
+            <li><a href="http://changy-.github.io/tags.html">Tags</a>
+        </ul>
+
+		
+        <h5 class="sidebar-title">Categories</h5>
+        <ul class="side-nav">
+            <li><a href="http://changy-.github.io/category/class_study.html">class_study</a></li>
+            <li><a href="http://changy-.github.io/category/tools.html">tools</a></li>
+            <li><a href="http://changy-.github.io/category/try.html">Try</a></li>
+   
+        </ul>
+
+        <h5 class="sidebar-title">Links</h5>
+        <ul class="side-nav">
+            <li><a href="http://changy-.diandian.com/">Old_Blog</a></li>
+            <li><a href="http://whitelovesyudy.sinaapp.com">white</a></li>
+            <li><a href="http://www.solitarysite.com">小夏</a></li>
+            <li><a href="http://www.tinydawn.com">大伟</a></li>
+        </ul>
+		
+        <h5 class="sidebar-title">Social</h5>
+        <ul class="side-nav">
+            <li><a href="http://github.com/changy-">Github</a></li>
+            <li><a href="https://www.quora.com/">Quora</a></li>
+        </ul>
+
+    </aside> <!-- End Sidebar -->
+
+</div> <!-- End Main Content and Sidebar -->
+
+
+<!-- Footer -->
+<footer class="row">
+    <div class="large-12 columns">
+        <hr />
+        <div class="row">
+            <div class="large-6 columns">
+              <!--                  <p>Process by changy</p> -->
+            </div>
+            </div>
+    </div>
+</footer>
+</body>
+</html>
