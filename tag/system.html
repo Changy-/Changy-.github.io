@@ -95,16 +95,16 @@
 <p>前3者比较好理解,最后一部分,CPU现场信息,是为了切换进程时保存当前运行的状态.
  在Linux中,进程结构名是TASK_STRUCT,这个结构体包含很多个进程的信息,可以google一下.
  重点记录一下图中的3个信息:
- <img alt="" src="http://" />
+ <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2017:29:56.png?raw=true" />
  p_exec保存的是可执行文件的入口地址, p_as保存的是进程地址空间,在这个空间内部,是使用一刻AVL树,方便运行时候的查找, u_info记录的是打开的文件.</p>
 <ol>
 <li>
 <p>进程状态 &amp;&amp; 状态转换
  有三状态,无状态和七状态
+ <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2017:36:41.png?raw=true" />
  <img alt="" src="http://" />
  <img alt="" src="http://" />
- <img alt="" src="http://" />
- <img alt="" src="http://" /></p>
+ <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2017:37:56.png?raw=true" /></p>
 </li>
 <li>
 <p>进程控制
@@ -121,19 +121,19 @@
 </ol>
 <p>简单概括就是,子进程复制了父进程,但是,这里也有一个缺点,由于子进程的工作肯定是和父进程不太相关的,后期会调用exec()函数来覆盖这部分的PCB,所以复制了父进程的信息也并没有什么用处,反而会浪费资源. 在Linux中,对这种机制进行了改进,调用fork()后,并不是复制父进程的结构体,而是返回一个指向内存的一个指针,然后采用Copy-On-Write技术,即程序需要写的时候再copy进来,这样,效率旧高了很多.</p>
 <p>一段fork()代码
- <img alt="" src="http://" /></p>
+ <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2017:47:55.png?raw=true" /></p>
 <ol>
 <li>进程控制
  OS给每个进程都分配了一个地址空间????
- <img alt="" src="http://" />
- 这段代码很好理解,输出穿进去的参数的值和地址.
+ <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2017:52:25.png?raw=true" />
+ 这段代码很好理解,输出传进去的参数的值和地址.
  我们同时运行2个该程序.
  <img alt="" src="http://" /> </li>
 </ol>
 <p>可以看出,不同的程序,变量却是相同的地址,其实这里使用的是虚拟地址空间,并不是实际的内存地址.</p>
 <h2>线程</h2>
 <p>线程的典型应用:
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2018:08:07.png?raw=true" /></p>
 <p>线程:
 - 有标示符ID
 - 有状态及状态转换 → 需要提供一些操作
@@ -144,7 +144,7 @@
 - 可以创建、撤消另一个线程</p>
 <p>线程分为用户级线程,核心级线程和混合型.
 用户级:
-<img alt="" src="http://" />
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2018:11:45.png?raw=true" />
 优点：
  线程切换快
  调度算法是应用程序特定的
@@ -155,9 +155,9 @@
  大多数系统调用是阻塞的，因此，由于内核阻
 塞进程，故进程中所有线程也被阻塞</p>
 <p>核心级:
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2018:13:08.png?raw=true" /></p>
 <p>混合型:
-<img alt="" src="http://" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-27%2018:13:43.png?raw=true" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
 
     Tagged: 
     <a href="http://changy-.github.io/tag/system.html">system </a>
