@@ -47,44 +47,117 @@
         
 
             <article>
-                <a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html"><h3 class="article-title">中断 && 异常 && 系统调用</h3></a>
-<h6 class="subheader" title="2015-12-26T10:57:00-05:00">2015-12-26
+                <a href="http://changy-.github.io/articles/jin-cheng-xian-cheng-part-1.html"><h3 class="article-title">进程 && 线程 part 1</h3></a>
+<h6 class="subheader" title="2015-12-27T17:07:00-05:00">2015-12-27
 </h6>
 
 
-<h1>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</h1>
-<h3>基本概念</h3>
-<p>操作系统需要两种CPU状态:
- 内核态(Kernel Mode)：运行操作系统程序
- 用户态(User Mode)：运行用户程序</p>
-<p>用户态 → 内核态
-- 唯一途径 → 中断/异常/陷入机制</p>
-<p>内核态 → 用户态
-- 设置程序状态字PSW</p>
-<p>系统调用就属于第二种. (访管指令)</p>
-<h3>中断和异常</h3>
-<p>中断和异常是操作系统的驱动.</p>
-<p>中断(外中断), 是外部事件,导致硬件的中断:
-- I/O 中断
-- 时钟中断
-- 硬件故障</p>
-<p>异常(内中断), 是由CPU运行的指令而产生的:
-- 系统调用
-- 页故障
-- 保护性异常
-- 断点指令(调试程序)
-- 其他</p>
-<p>示意图如下:
-<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:24:15.png?raw=true" /></p>
-<p>可以看出,最关键是的如何使用向量表找到中断程序的入口地址.
-<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:28:07.png?raw=true" /></p>
-<p>通过GDT找到段基址,通过IDT找到偏移量,这样就可以知道中断程序的入口地址了.</p>
-<h3>系统调用</h3>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:39:22.png?raw=true" /></p>
-<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:48:54.png?raw=true" /></p>
-<p>这是write(1,"hello",7)的汇编代码,可以看到,通过压栈存储所有的变量,然后执行int 0x80 产生系统调用.
-最后,举一个linux中系统调用的例子:
-<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-26%2010:52:07.png?raw=true" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
+<h1>进程 &amp;&amp; 线程 part 1</h1>
+<h2>基本概念</h2>
+<ul>
+<li>多道程序设计: 允许多个程序同时进入内存并运行</li>
+<li>并发环境</li>
+<li>进程: 进程是具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位</li>
+<li>程序的一次执行</li>
+<li>正在运行的程序的抽象</li>
+<li>PCB (process control block)</li>
+<li>process table</li>
+<li>上下文(context)切换</li>
+</ul>
+<h2>进程</h2>
+<ol>
+<li>
+<p>PCB (process control block)
+    PCB是用来描述进程信息的,比如进程的地址,优先级等等.并且进程与PCB是一一对应的.在linux上,输入PS命令旧可以看到当前运行的进程了.</p>
+<p>PCB所包含的信息:
+- <strong>进程描述信息</strong>
+进程标识符(process ID)，唯一，通常是一个整数
+进程名，通常基于可执行文件名，不唯一
+用户标识符(user ID)
+进程组关系
+- <strong>进程控制信息</strong>
+当前状态
+优先级(priority)
+代码执行入口地址
+程序的磁盘地址
+运行统计信息(执行时间、页面调度)
+进程间同步和通信
+进程的队列指针
+进程的消息队列指针
+- <strong>所拥有的资源和使用情况</strong>
+虚拟地址空间的状况
+打开文件列表
+- <strong>CPU现场信息</strong>
+寄存器值(通用寄存器、程序计数器PC、程序状态字PSW、栈指针)
+指向该进程页表的指针</p>
+</li>
+</ol>
+<p>前3者比较好理解,最后一部分,CPU现场信息,是为了切换进程时保存当前运行的状态.
+ 在Linux中,进程结构名是TASK_STRUCT,这个结构体包含很多个进程的信息,可以google一下.
+ 重点记录一下图中的3个信息:
+ <img alt="" src="http://" />
+ p_exec保存的是可执行文件的入口地址, p_as保存的是进程地址空间,在这个空间内部,是使用一刻AVL树,方便运行时候的查找, u_info记录的是打开的文件.</p>
+<ol>
+<li>
+<p>进程状态 &amp;&amp; 状态转换
+ 有三状态,无状态和七状态
+ <img alt="" src="http://" />
+ <img alt="" src="http://" />
+ <img alt="" src="http://" />
+ <img alt="" src="http://" /></p>
+</li>
+<li>
+<p>进程控制
+ 创建,注销,阻塞等操作.
+ 这里主要记录fork()函数
+ - 为子进程分配一个空闲的进程描述符proc 结构
+ - 分配给子进程唯一标识 pid
+ - 以一次一页的方式复制父进程地址空间
+ - 从父进程处继承共享资源，如打开的文件和当前工作目录等
+ - 将子进程的状态设为就绪，插入到就绪队列
+ - 对子进程返回标识符 0
+ - 向父进程返回子进程的 pid</p>
+</li>
+</ol>
+<p>简单概括就是,子进程复制了父进程,但是,这里也有一个缺点,由于子进程的工作肯定是和父进程不太相关的,后期会调用exec()函数来覆盖这部分的PCB,所以复制了父进程的信息也并没有什么用处,反而会浪费资源. 在Linux中,对这种机制进行了改进,调用fork()后,并不是复制父进程的结构体,而是返回一个指向内存的一个指针,然后采用Copy-On-Write技术,即程序需要写的时候再copy进来,这样,效率旧高了很多.</p>
+<p>一段fork()代码
+ <img alt="" src="http://" /></p>
+<ol>
+<li>进程控制
+ OS给每个进程都分配了一个地址空间????
+ <img alt="" src="http://" />
+ 这段代码很好理解,输出穿进去的参数的值和地址.
+ 我们同时运行2个该程序.
+ <img alt="" src="http://" /> </li>
+</ol>
+<p>可以看出,不同的程序,变量却是相同的地址,其实这里使用的是虚拟地址空间,并不是实际的内存地址.</p>
+<h2>线程</h2>
+<p>线程的典型应用:
+<img alt="" src="http://" /></p>
+<p>线程:
+- 有标示符ID
+- 有状态及状态转换 → 需要提供一些操作
+- 不运行时需要保存的上下文
+ 有上下文环境：程序计数器等寄存器
+- 有自己的栈和栈指针 √
+- 共享所在进程的地址空间和其他资源
+- 可以创建、撤消另一个线程</p>
+<p>线程分为用户级线程,核心级线程和混合型.
+用户级:
+<img alt="" src="http://" />
+优点：
+ 线程切换快
+ 调度算法是应用程序特定的
+ 用户级线程可运行在任何操作系统上（只需要实现线程库）
+缺点：
+ 内核只将处理器分配给进程，同一进程中的两
+个线程不能同时运行于两个处理器上
+ 大多数系统调用是阻塞的，因此，由于内核阻
+塞进程，故进程中所有线程也被阻塞</p>
+<p>核心级:
+<img alt="" src="http://" /></p>
+<p>混合型:
+<img alt="" src="http://" /></p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
 
     Tagged: 
     <a href="http://changy-.github.io/tag/system.html">system </a>
@@ -92,8 +165,34 @@
 
 
 
-<p><a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html#disqus_thread">comments</a></p>            </article>
+<p><a href="http://changy-.github.io/articles/jin-cheng-xian-cheng-part-1.html#disqus_thread">comments</a></p>            </article>
 
+
+                <hr  class="gradient"/>
+
+
+        
+
+
+            <article>
+                <a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html"><h3 class="article-title">中断 && 异常 && 系统调用</h3></a>
+<h6 class="subheader" title="2015-12-26T10:57:00-05:00">2015-12-26
+</h6>
+
+
+<p>OS 总结,为面试做准备</p><p class="subheader">Category: <a href="http://changy-.github.io/category/os.html">OS</a>
+
+    Tagged: 
+    <a href="http://changy-.github.io/tag/system.html">system </a>
+</p>
+
+
+
+<p><a href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html#disqus_thread">comments</a></p>                <a class="button radius secondary small right" href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html">Read More</a>
+                <hr  class="gradient"/>
+            </article>
+
+            <!-- /#posts-list -->
 <div class="pagination-centered">
 <h6 class="subheader">Page 1 of 1</h6>
 
@@ -101,10 +200,6 @@
 
 </p>
 </div>
-
-
-
-            <!-- /#posts-list -->
 
     </div>
     <!-- End Main Content -->

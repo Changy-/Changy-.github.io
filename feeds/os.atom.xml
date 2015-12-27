@@ -1,5 +1,110 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/os.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-12-26T10:57:00-05:00</updated><entry><title>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</title><link href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html" rel="alternate"></link><updated>2015-12-26T10:57:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-26:articles/zhong-duan-yi-chang-xi-tong-diao-yong.html</id><summary type="html">&lt;h1&gt;中断 &amp;amp;&amp;amp; 异常 &amp;amp;&amp;amp; 系统调用&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/os.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-12-27T17:07:00-05:00</updated><entry><title>进程 &amp;&amp; 线程 part 1</title><link href="http://changy-.github.io/articles/jin-cheng-xian-cheng-part-1.html" rel="alternate"></link><updated>2015-12-27T17:07:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-27:articles/jin-cheng-xian-cheng-part-1.html</id><summary type="html">&lt;h1&gt;进程 &amp;amp;&amp;amp; 线程 part 1&lt;/h1&gt;
+&lt;h2&gt;基本概念&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;多道程序设计: 允许多个程序同时进入内存并运行&lt;/li&gt;
+&lt;li&gt;并发环境&lt;/li&gt;
+&lt;li&gt;进程: 进程是具有独立功能的程序关于某个数据集合上的一次运行活动，是系统进行资源分配和调度的独立单位&lt;/li&gt;
+&lt;li&gt;程序的一次执行&lt;/li&gt;
+&lt;li&gt;正在运行的程序的抽象&lt;/li&gt;
+&lt;li&gt;PCB (process control block)&lt;/li&gt;
+&lt;li&gt;process table&lt;/li&gt;
+&lt;li&gt;上下文(context)切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2&gt;进程&lt;/h2&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;PCB (process control block)
+    PCB是用来描述进程信息的,比如进程的地址,优先级等等.并且进程与PCB是一一对应的.在linux上,输入PS命令旧可以看到当前运行的进程了.&lt;/p&gt;
+&lt;p&gt;PCB所包含的信息:
+- &lt;strong&gt;进程描述信息&lt;/strong&gt;
+进程标识符(process ID)，唯一，通常是一个整数
+进程名，通常基于可执行文件名，不唯一
+用户标识符(user ID)
+进程组关系
+- &lt;strong&gt;进程控制信息&lt;/strong&gt;
+当前状态
+优先级(priority)
+代码执行入口地址
+程序的磁盘地址
+运行统计信息(执行时间、页面调度)
+进程间同步和通信
+进程的队列指针
+进程的消息队列指针
+- &lt;strong&gt;所拥有的资源和使用情况&lt;/strong&gt;
+虚拟地址空间的状况
+打开文件列表
+- &lt;strong&gt;CPU现场信息&lt;/strong&gt;
+寄存器值(通用寄存器、程序计数器PC、程序状态字PSW、栈指针)
+指向该进程页表的指针&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;前3者比较好理解,最后一部分,CPU现场信息,是为了切换进程时保存当前运行的状态.
+ 在Linux中,进程结构名是TASK_STRUCT,这个结构体包含很多个进程的信息,可以google一下.
+ 重点记录一下图中的3个信息:
+ &lt;img alt="" src="http://" /&gt;
+ p_exec保存的是可执行文件的入口地址, p_as保存的是进程地址空间,在这个空间内部,是使用一刻AVL树,方便运行时候的查找, u_info记录的是打开的文件.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;进程状态 &amp;amp;&amp;amp; 状态转换
+ 有三状态,无状态和七状态
+ &lt;img alt="" src="http://" /&gt;
+ &lt;img alt="" src="http://" /&gt;
+ &lt;img alt="" src="http://" /&gt;
+ &lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;进程控制
+ 创建,注销,阻塞等操作.
+ 这里主要记录fork()函数
+ - 为子进程分配一个空闲的进程描述符proc 结构
+ - 分配给子进程唯一标识 pid
+ - 以一次一页的方式复制父进程地址空间
+ - 从父进程处继承共享资源，如打开的文件和当前工作目录等
+ - 将子进程的状态设为就绪，插入到就绪队列
+ - 对子进程返回标识符 0
+ - 向父进程返回子进程的 pid&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;简单概括就是,子进程复制了父进程,但是,这里也有一个缺点,由于子进程的工作肯定是和父进程不太相关的,后期会调用exec()函数来覆盖这部分的PCB,所以复制了父进程的信息也并没有什么用处,反而会浪费资源. 在Linux中,对这种机制进行了改进,调用fork()后,并不是复制父进程的结构体,而是返回一个指向内存的一个指针,然后采用Copy-On-Write技术,即程序需要写的时候再copy进来,这样,效率旧高了很多.&lt;/p&gt;
+&lt;p&gt;一段fork()代码
+ &lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;进程控制
+ OS给每个进程都分配了一个地址空间????
+ &lt;img alt="" src="http://" /&gt;
+ 这段代码很好理解,输出穿进去的参数的值和地址.
+ 我们同时运行2个该程序.
+ &lt;img alt="" src="http://" /&gt; &lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;可以看出,不同的程序,变量却是相同的地址,其实这里使用的是虚拟地址空间,并不是实际的内存地址.&lt;/p&gt;
+&lt;h2&gt;线程&lt;/h2&gt;
+&lt;p&gt;线程的典型应用:
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;线程:
+- 有标示符ID
+- 有状态及状态转换 → 需要提供一些操作
+- 不运行时需要保存的上下文
+ 有上下文环境：程序计数器等寄存器
+- 有自己的栈和栈指针 √
+- 共享所在进程的地址空间和其他资源
+- 可以创建、撤消另一个线程&lt;/p&gt;
+&lt;p&gt;线程分为用户级线程,核心级线程和混合型.
+用户级:
+&lt;img alt="" src="http://" /&gt;
+优点：
+ 线程切换快
+ 调度算法是应用程序特定的
+ 用户级线程可运行在任何操作系统上（只需要实现线程库）
+缺点：
+ 内核只将处理器分配给进程，同一进程中的两
+个线程不能同时运行于两个处理器上
+ 大多数系统调用是阻塞的，因此，由于内核阻
+塞进程，故进程中所有线程也被阻塞&lt;/p&gt;
+&lt;p&gt;核心级:
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;混合型:
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;</summary><category term="system"></category></entry><entry><title>中断 &amp;&amp; 异常 &amp;&amp; 系统调用</title><link href="http://changy-.github.io/articles/zhong-duan-yi-chang-xi-tong-diao-yong.html" rel="alternate"></link><updated>2015-12-26T10:57:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-26:articles/zhong-duan-yi-chang-xi-tong-diao-yong.html</id><summary type="html">&lt;h1&gt;中断 &amp;amp;&amp;amp; 异常 &amp;amp;&amp;amp; 系统调用&lt;/h1&gt;
 &lt;h3&gt;基本概念&lt;/h3&gt;
 &lt;p&gt;操作系统需要两种CPU状态:
  内核态(Kernel Mode)：运行操作系统程序
