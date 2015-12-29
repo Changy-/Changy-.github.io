@@ -183,37 +183,37 @@ I can’t figure out the meaning.&lt;/p&gt;
 - Byte[9] --&amp;gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)&lt;/p&gt;
 &lt;p&gt;Finally, this value shows that it’s remaining 91% power, last charged time is 2015-10-26-6h-04min-59s, it has been charged 11 times and the status is not charging.&lt;/p&gt;
 &lt;h2&gt;Appendix&lt;/h2&gt;
-&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;
-handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
-handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb
-handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb
-handle: 0x0008, char properties: 0x02, char value handle: 0x0009, uuid: 00002a04-0000-1000-8000-00805f9b34fb
-handle: 0x000d, char properties: 0x22, char value handle: 0x000e, uuid: 00002a05-0000-1000-8000-00805f9b34fb
-handle: 0x0011, char properties: 0x02, char value handle: 0x0012, uuid: 0000ff01-0000-1000-8000-00805f9b34fb
-handle: 0x0013, char properties: 0x0a, char value handle: 0x0014, uuid: 0000ff02-0000-1000-8000-00805f9b34fb
-handle: 0x0015, char properties: 0x12, char value handle: 0x0016, uuid: 0000ff03-0000-1000-8000-00805f9b34fb
-handle: 0x0018, char properties: 0x0a, char value handle: 0x0019, uuid: 0000ff04-0000-1000-8000-00805f9b34fb
-handle: 0x001a, char properties: 0x08, char value handle: 0x001b, uuid: 0000ff05-0000-1000-8000-00805f9b34fb
-handle: 0x001c, char properties: 0x12, char value handle: 0x001d, uuid: 0000ff06-0000-1000-8000-00805f9b34fb
-handle: 0x001f, char properties: 0x12, char value handle: 0x0020, uuid: 0000ff07-0000-1000-8000-00805f9b34fb
-handle: 0x0022, char properties: 0x04, char value handle: 0x0023, uuid: 0000ff08-0000-1000-8000-00805f9b34fb
-handle: 0x0024, char properties: 0x1a, char value handle: 0x0025, uuid: 0000ff09-0000-1000-8000-00805f9b34fb
-handle: 0x0027, char properties: 0x0a, char value handle: 0x0028, uuid: 0000ff0a-0000-1000-8000-00805f9b34fb
-handle: 0x0029, char properties: 0x0a, char value handle: 0x002a, uuid: 0000ff0b-0000-1000-8000-00805f9b34fb
-handle: 0x002b, char properties: 0x12, char value handle: 0x002c, uuid: 0000ff0c-0000-1000-8000-00805f9b34fb
-handle: 0x002e, char properties: 0x0a, char value handle: 0x002f, uuid: 0000ff0d-0000-1000-8000-00805f9b34fb
-handle: 0x0030, char properties: 0x1a, char value handle: 0x0031, uuid: 0000ff0e-0000-1000-8000-00805f9b34fb
-handle: 0x0033, char properties: 0x0a, char value handle: 0x0034, uuid: 0000ff0f-0000-1000-8000-00805f9b34fb
-handle: 0x0035, char properties: 0x10, char value handle: 0x0036, uuid: 0000ff10-0000-1000-8000-00805f9b34fb
-handle: 0x0038, char properties: 0x02, char value handle: 0x0039, uuid: 0000fec9-0000-1000-8000-00805f9b34fb
-handle: 0x003b, char properties: 0x08, char value handle: 0x003c, uuid: 0000fedd-0000-1000-8000-00805f9b34fb
-handle: 0x003d, char properties: 0x02, char value handle: 0x003e, uuid: 0000fede-0000-1000-8000-00805f9b34fb
-handle: 0x003f, char properties: 0x02, char value handle: 0x0040, uuid: 0000fedf-0000-1000-8000-00805f9b34fb
-handle: 0x0041, char properties: 0x08, char value handle: 0x0042, uuid: 0000fed0-0000-1000-8000-00805f9b34fb
-handle: 0x0043, char properties: 0x08, char value handle: 0x0044, uuid: 0000fed1-0000-1000-8000-00805f9b34fb
-handle: 0x0045, char properties: 0x02, char value handle: 0x0046, uuid: 0000fed2-0000-1000-8000-00805f9b34fb
-handle: 0x0047, char properties: 0x08, char value handle: 0x0048, uuid: 0000fed3-0000-1000-8000-00805f9b34fb
-handle: 0x004a, char properties: 0x08, char value handle: 0x004b, uuid: 0000fec7-0000-1000-8000-00805f9b34fb
-handle: 0x004c, char properties: 0x22, char value handle: 0x004d, uuid: 0000fec8-0000-1000-8000-00805f9b34fb
-handle: 0x004f, char properties: 0x02, char value handle: 0x0050, uuid: 0000fec9-0000-1000-8000-00805f9b34fb
-handle: 0x0052, char properties: 0x04, char value handle: 0x0053, uuid: 00002a06-0000-1000-8000-00805f9b34fb&lt;/p&gt;</summary><category term="Mi Band"></category></entry></feed>
+&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;&lt;/p&gt;
+&lt;p&gt;handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0008, char properties: 0x02, char value handle: 0x0009, uuid: 00002a04-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x000d, char properties: 0x22, char value handle: 0x000e, uuid: 00002a05-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0011, char properties: 0x02, char value handle: 0x0012, uuid: 0000ff01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0013, char properties: 0x0a, char value handle: 0x0014, uuid: 0000ff02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0015, char properties: 0x12, char value handle: 0x0016, uuid: 0000ff03-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0018, char properties: 0x0a, char value handle: 0x0019, uuid: 0000ff04-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x001a, char properties: 0x08, char value handle: 0x001b, uuid: 0000ff05-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x001c, char properties: 0x12, char value handle: 0x001d, uuid: 0000ff06-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x001f, char properties: 0x12, char value handle: 0x0020, uuid: 0000ff07-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0022, char properties: 0x04, char value handle: 0x0023, uuid: 0000ff08-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0024, char properties: 0x1a, char value handle: 0x0025, uuid: 0000ff09-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0027, char properties: 0x0a, char value handle: 0x0028, uuid: 0000ff0a-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0029, char properties: 0x0a, char value handle: 0x002a, uuid: 0000ff0b-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x002b, char properties: 0x12, char value handle: 0x002c, uuid: 0000ff0c-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x002e, char properties: 0x0a, char value handle: 0x002f, uuid: 0000ff0d-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0030, char properties: 0x1a, char value handle: 0x0031, uuid: 0000ff0e-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0033, char properties: 0x0a, char value handle: 0x0034, uuid: 0000ff0f-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0035, char properties: 0x10, char value handle: 0x0036, uuid: 0000ff10-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0038, char properties: 0x02, char value handle: 0x0039, uuid: 0000fec9-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x003b, char properties: 0x08, char value handle: 0x003c, uuid: 0000fedd-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x003d, char properties: 0x02, char value handle: 0x003e, uuid: 0000fede-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x003f, char properties: 0x02, char value handle: 0x0040, uuid: 0000fedf-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0041, char properties: 0x08, char value handle: 0x0042, uuid: 0000fed0-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0043, char properties: 0x08, char value handle: 0x0044, uuid: 0000fed1-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0045, char properties: 0x02, char value handle: 0x0046, uuid: 0000fed2-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0047, char properties: 0x08, char value handle: 0x0048, uuid: 0000fed3-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x004a, char properties: 0x08, char value handle: 0x004b, uuid: 0000fec7-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x004c, char properties: 0x22, char value handle: 0x004d, uuid: 0000fec8-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x004f, char properties: 0x02, char value handle: 0x0050, uuid: 0000fec9-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0052, char properties: 0x04, char value handle: 0x0053, uuid: 00002a06-0000-1000-8000-00805f9b34fb&lt;/p&gt;</summary><category term="Mi Band"></category></entry></feed>
