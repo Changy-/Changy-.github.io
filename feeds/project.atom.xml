@@ -9,8 +9,8 @@
 &lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:57:41.png?raw=true" /&gt;&lt;/p&gt;
 &lt;h2&gt;BLE communication&lt;/h2&gt;
 &lt;h3&gt;Bluetooth Low Energy Protocol&lt;/h3&gt;
-&lt;p&gt;Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.
-Bluetooth Smart (low energy) wireless technology features:
+&lt;p&gt;Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.&lt;/p&gt;
+&lt;p&gt;Bluetooth Smart (low energy) wireless technology features:
  - Ultra-low peak, average and idle mode power consumption
  - Ability to run for years on standard coin-cell batteries
  - Low cost
@@ -111,7 +111,7 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[4]&lt;/td&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[4] \&lt;/td&gt;
 &lt;td&gt;(0xff &amp;amp; byte[5]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -119,7 +119,7 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[6]&lt;/td&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[6] \&lt;/td&gt;
 &lt;td&gt;(0xff &amp;amp; byte[7]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -127,7 +127,7 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[8]&lt;/td&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[8] \&lt;/td&gt;
 &lt;td&gt;(0xff &amp;amp; byte[9]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
@@ -135,7 +135,7 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;td&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[10]&lt;/td&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[10] \&lt;/td&gt;
 &lt;td&gt;(0xff &amp;amp; byte[11]) &amp;lt;&amp;lt; 8).&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
