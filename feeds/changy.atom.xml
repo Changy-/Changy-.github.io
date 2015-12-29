@@ -94,8 +94,8 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;li&gt;Byte[2] --&amp;gt; steps&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;strong&gt;0xff08, FIRMWARE_DATA&lt;/strong&gt;
-I can’t figure out&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0xff08, FIRMWARE_DATA&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;I can’t figure out&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;0xff09, LE_PARAMS&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;table&gt;
@@ -183,12 +183,10 @@ I can’t figure out the meaning.&lt;/p&gt;
 - Byte[9] --&amp;gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)&lt;/p&gt;
 &lt;p&gt;Finally, this value shows that it’s remaining 91% power, last charged time is 2015-10-26-6h-04min-59s, it has been charged 11 times and the status is not charging.&lt;/p&gt;
 &lt;h2&gt;Appendix&lt;/h2&gt;
-&lt;blockquote&gt;
-&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;
-handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
-handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb
-handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
-&lt;/blockquote&gt;
+&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;&lt;/p&gt;
+&lt;p&gt;handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;p&gt;handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
 &lt;p&gt;handle: 0x0008, char properties: 0x02, char value handle: 0x0009, uuid: 00002a04-0000-1000-8000-00805f9b34fb&lt;/p&gt;
 &lt;p&gt;handle: 0x000d, char properties: 0x22, char value handle: 0x000e, uuid: 00002a05-0000-1000-8000-00805f9b34fb&lt;/p&gt;
 &lt;p&gt;handle: 0x0011, char properties: 0x02, char value handle: 0x0012, uuid: 0000ff01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
