@@ -90,15 +90,17 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 <p>Table 2 shows the meaning of every characteristic in 0xfee0 service.
 <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:05:51.png?raw=true" /></p>
 <p>If I get data 0xff02 and its value is 60-09-4d-49, how to explain this? In fact, every value has its specific definition.</p>
-<p><strong>0xff01, DEVICE_INFO</strong></p>
+<p><strong>0xff01, DEVICE_INFO</strong>
+The length of value is 16 bytes.</p>
 <blockquote>
-<p>The length of value is 16 bytes.
-- Byte[0-3] --&gt; device ID
-- Byte[4-7] --&gt; profile version
-- Byte[8-9] --&gt; feature
-- Byte[10-11] --&gt; appearance
-- Byte[12-13] --&gt; hardware version
-- Byte[14-15] --&gt; firmware version</p>
+<ul>
+<li>Byte[0-3] --&gt; device ID</li>
+<li>Byte[4-7] --&gt; profile version</li>
+<li>Byte[8-9] --&gt; feature</li>
+<li>Byte[10-11] --&gt; appearance</li>
+<li>Byte[12-13] --&gt; hardware version</li>
+<li>Byte[14-15] --&gt; firmware version</li>
+</ul>
 </blockquote>
 <p><strong>0xff02, DEVICE_NAME</strong></p>
 <blockquote>
@@ -109,14 +111,16 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 <p>Mi Fit App gets descriptor 0x2902, but I can’t figure out what it’ll do next. Maybe it’s used for notifying when the band have new data to upload.</p>
 </blockquote>
 <p><strong>0xff04, USER_INFO</strong></p>
+<p>(get data from Mi cloud)</p>
 <blockquote>
-<p>(get data from Mi cloud)
-- Byte[0-3] --&gt; user ID
-- Byte[4] --&gt; gender (0:female, 1:male)
-- Byte[5] --&gt; age
-- Byte[6] --&gt; height
-- Byte[7] --&gt; weight
-- Byte[8-11] --&gt; alias</p>
+<ul>
+<li>Byte[0-3] --&gt; user ID</li>
+<li>Byte[4] --&gt; gender (0:female, 1:male)</li>
+<li>Byte[5] --&gt; age</li>
+<li>Byte[6] --&gt; height</li>
+<li>Byte[7] --&gt; weight</li>
+<li>Byte[8-11] --&gt; alias</li>
+</ul>
 </blockquote>
 <p><strong>0xff05, CONTROL_POINT</strong></p>
 <blockquote>
@@ -166,8 +170,8 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 <li>0xffff &amp; (0xff &amp; byte[10] or (0xff &amp; byte[11]) &lt;&lt; 8)</li>
 </ul>
 </blockquote>
-<p><strong>0xff0a, DATE_TIME</strong>
-12 bytes, Year-month-day-hour-minute-second- Year-month-day-hour-minute-second
+<p><strong>0xff0a, DATE_TIME</strong></p>
+<p>12 bytes, Year-month-day-hour-minute-second- Year-month-day-hour-minute-second
 The first one is Gregorian and the second one is lunar.</p>
 <p><strong>0xff0b, STATISTICS</strong></p>
 <blockquote>
@@ -201,11 +205,13 @@ I can’t figure out the meaning.</p>
 <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:20:42.png?raw=true" />
 <img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:22:49.png?raw=true" /></p>
 <p>We can see the Master (Android phone) want to read the data in handle 0x002c. According to P9,it’s between 0x0010 and 0x0039. So the service Master wanted is 0xffe0. Finally, we can locate the exact characteristic by 0x002c in appendix. It’s 0xff0c, which means the Master wants information about battery.</p>
-<p>From the bottom part, we know the value is 5b-0f-0a-1a-06-04-3b-11-00-04 and we can refer to the meaning of battery I mentioned before:
-- Byte[0] --&gt; level in%
-- Byte[1-6] --&gt; year (should plus 2000) -month-day-hour-minute-second
-- Byte[7-8] --&gt; charge times
-- Byte[9] --&gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)</p>
+<p>From the bottom part, we know the value is 5b-0f-0a-1a-06-04-3b-11-00-04 and we can refer to the meaning of battery I mentioned before:</p>
+<ul>
+<li>Byte[0] --&gt; level in%</li>
+<li>Byte[1-6] --&gt; year (should plus 2000) -month-day-hour-minute-second</li>
+<li>Byte[7-8] --&gt; charge times</li>
+<li>Byte[9] --&gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)</li>
+</ul>
 <p>Finally, this value shows that it’s remaining 91% power, last charged time is 2015-10-26-6h-04min-59s, it has been charged 11 times and the status is not charging.</p>
 <h2>Appendix</h2>
 <p>[CON][88:0F:10:DA:5A:39][LE]&gt;</p>
