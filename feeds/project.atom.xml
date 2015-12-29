@@ -11,11 +11,11 @@
 &lt;h3&gt;Bluetooth Low Energy Protocol&lt;/h3&gt;
 &lt;p&gt;Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.
 Bluetooth Smart (low energy) wireless technology features:
-- Ultra-low peak, average and idle mode power consumption
-- Ability to run for years on standard coin-cell batteries
-- Low cost
-- Multi-vendor interoperability
-- Enhanced range&lt;/p&gt;
+ - Ultra-low peak, average and idle mode power consumption
+ - Ability to run for years on standard coin-cell batteries
+ - Low cost
+ - Multi-vendor interoperability
+ - Enhanced range&lt;/p&gt;
 &lt;p&gt;&lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:59:33.png?raw=true" /&gt;&lt;/p&gt;
 &lt;p&gt;As showed in P6, it looks like TCP/IP Protocol Stack and they are very similar. The bottom 3 layers
 are designed for hardware, paired and encryption. The top 4 layers (Host and Application layers)
@@ -183,10 +183,12 @@ I can’t figure out the meaning.&lt;/p&gt;
 - Byte[9] --&amp;gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)&lt;/p&gt;
 &lt;p&gt;Finally, this value shows that it’s remaining 91% power, last charged time is 2015-10-26-6h-04min-59s, it has been charged 11 times and the status is not charging.&lt;/p&gt;
 &lt;h2&gt;Appendix&lt;/h2&gt;
-&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;&lt;/p&gt;
-&lt;p&gt;handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb&lt;/p&gt;
-&lt;p&gt;handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
-&lt;p&gt;handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;
+handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
+handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb
+handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;handle: 0x0008, char properties: 0x02, char value handle: 0x0009, uuid: 00002a04-0000-1000-8000-00805f9b34fb&lt;/p&gt;
 &lt;p&gt;handle: 0x000d, char properties: 0x22, char value handle: 0x000e, uuid: 00002a05-0000-1000-8000-00805f9b34fb&lt;/p&gt;
 &lt;p&gt;handle: 0x0011, char properties: 0x02, char value handle: 0x0012, uuid: 0000ff01-0000-1000-8000-00805f9b34fb&lt;/p&gt;
