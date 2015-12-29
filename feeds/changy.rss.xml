@@ -10,12 +10,14 @@
 &lt;h2&gt;BLE communication&lt;/h2&gt;
 &lt;h3&gt;Bluetooth Low Energy Protocol&lt;/h3&gt;
 &lt;p&gt;Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.&lt;/p&gt;
-&lt;p&gt;Bluetooth Smart (low energy) wireless technology features:
-1. Ultra-low peak, average and idle mode power consumption
-2. Ability to run for years on standard coin-cell batteries
-3. Low cost
-4. Multi-vendor interoperability
-5. Enhanced range&lt;/p&gt;
+&lt;p&gt;Bluetooth Smart (low energy) wireless technology features:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Ultra-low peak, average and idle mode power consumption&lt;/li&gt;
+&lt;li&gt;Ability to run for years on standard coin-cell batteries&lt;/li&gt;
+&lt;li&gt;Low cost&lt;/li&gt;
+&lt;li&gt;Multi-vendor interoperability&lt;/li&gt;
+&lt;li&gt;Enhanced range&lt;/li&gt;
+&lt;/ol&gt;
 &lt;p&gt;&lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:59:33.png?raw=true" /&gt;&lt;/p&gt;
 &lt;p&gt;As showed in P6, it looks like TCP/IP Protocol Stack and they are very similar. The bottom 3 layers
 are designed for hardware, paired and encryption. The top 4 layers (Host and Application layers)
@@ -35,14 +37,16 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;p&gt;Table 2 shows the meaning of every characteristic in 0xfee0 service.
 &lt;img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:05:51.png?raw=true" /&gt;&lt;/p&gt;
 &lt;p&gt;If I get data 0xff02 and its value is 60-09-4d-49, how to explain this? In fact, every value has its specific definition.&lt;/p&gt;
-&lt;p&gt;&lt;strong&gt;0xff01, DEVICE_INFO&lt;/strong&gt;
- The length of value is 16 bytes.
+&lt;p&gt;&lt;strong&gt;0xff01, DEVICE_INFO&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The length of value is 16 bytes.
 - Byte[0-3] --&amp;gt; device ID
 - Byte[4-7] --&amp;gt; profile version
 - Byte[8-9] --&amp;gt; feature
 - Byte[10-11] --&amp;gt; appearance
 - Byte[12-13] --&amp;gt; hardware version
 - Byte[14-15] --&amp;gt; firmware version&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;0xff02, DEVICE_NAME&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;Hex to String&lt;/p&gt;
@@ -96,48 +100,18 @@ more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit
 &lt;p&gt;I can’t figure out&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;0xff09, LE_PARAMS&lt;/strong&gt;&lt;/p&gt;
 &lt;blockquote&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;- connIntMin: 0xffff &amp;amp; (0xff &amp;amp; byte[0]&lt;/th&gt;
-&lt;th&gt;(0xff &amp;amp; byte[1]) &amp;lt;&amp;lt; 8)&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;- latency:&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[4]&lt;/td&gt;
-&lt;td&gt;(0xff &amp;amp; byte[5]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- timeout:&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[6]&lt;/td&gt;
-&lt;td&gt;(0xff &amp;amp; byte[7]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- connInt:&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[8]&lt;/td&gt;
-&lt;td&gt;(0xff &amp;amp; byte[9]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- advInt:&lt;/td&gt;
-&lt;td&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[10]&lt;/td&gt;
-&lt;td&gt;(0xff &amp;amp; byte[11]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;connIntMin: 0xffff &amp;amp; (0xff &amp;amp; byte[0] or (0xff &amp;amp; byte[1]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;li&gt;connIntMax: 0xffff &amp;amp; (0xff &amp;amp; byte[2] or (0xff &amp;amp; byte[3]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;li&gt;latency:&lt;/li&gt;
+&lt;li&gt;0xffff &amp;amp; (0xff &amp;amp; byte[4] or (0xff &amp;amp; byte[5]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;li&gt;timeout:&lt;/li&gt;
+&lt;li&gt;0xffff &amp;amp; (0xff &amp;amp; byte[6] or (0xff &amp;amp; byte[7]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;li&gt;connInt:&lt;/li&gt;
+&lt;li&gt;0xffff &amp;amp; (0xff &amp;amp; byte[8] or (0xff &amp;amp; byte[9]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;li&gt;advInt:&lt;/li&gt;
+&lt;li&gt;0xffff &amp;amp; (0xff &amp;amp; byte[10] or (0xff &amp;amp; byte[11]) &amp;lt;&amp;lt; 8)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/blockquote&gt;
 &lt;p&gt;&lt;strong&gt;0xff0a, DATE_TIME&lt;/strong&gt;
 12 bytes, Year-month-day-hour-minute-second- Year-month-day-hour-minute-second
