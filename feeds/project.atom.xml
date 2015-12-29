@@ -1,0 +1,219 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/project.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-12-28T21:43:00-05:00</updated><entry><title>Xiao Mi band protocol analyze</title><link href="http://changy-.github.io/articles/xiao-mi-band-protocol-analyze.html" rel="alternate"></link><updated>2015-12-28T21:43:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-28:articles/xiao-mi-band-protocol-analyze.html</id><summary type="html">&lt;h1&gt;Xiao Mi band protocol analyze&lt;/h1&gt;
+&lt;p&gt;I have used Mi band for 2 months and during this 2 months I analyzed how Bluetooth Low Energy protocol works and how Mi Fit App communicates with Mi band. There are 2 parts in this report. The first part is about data analyze which is recorded by Mi Fit App and the second is about BLE communication.&lt;/p&gt;
+&lt;h2&gt;Data analyze&lt;/h2&gt;
+&lt;p&gt;Mi Fit App saves all data in /data/data/com.xiaomi.hm.health/, where only Mi Fit itself and root App can reach. So I think it’s not possible for other Apps on Android to steal data, which is mentioned in initial “Draft Scope”. And Mi Fit saves most data in /databases and /shared_prefs.
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;In P2, user-db saves user information like name and sports.db saves your running data. And all of these data have been pushed into vendor’s server. When you change the phone or Mi band, the App will download those data from server. In P3, there also are some data like configure file.&lt;/p&gt;
+&lt;p&gt;&lt;a href="http://forum.xda-developers.com/general/accessories/xiaomi-mi-band-data-extraction-t3019156"&gt;Xmxm&lt;/a&gt; and his friends have done much to extract, clean and analyze Mi band data. Here, I use their tools to extract and analyze data. P4 shows the statistical chart about sleep and activity and P5 shows data of daily steps.
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;h2&gt;BLE communication&lt;/h2&gt;
+&lt;h3&gt;Bluetooth Low Energy Protocol&lt;/h3&gt;
+&lt;p&gt;Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.
+Bluetooth Smart (low energy) wireless technology features:
+- Ultra-low peak, average and idle mode power consumption
+- Ability to run for years on standard coin-cell batteries
+- Low cost
+- Multi-vendor interoperability
+- Enhanced range&lt;/p&gt;
+&lt;p&gt;&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;As showed in P6, it looks like TCP/IP Protocol Stack and they are very similar. The bottom 3 layers
+are designed for hardware, paired and encryption. The top 4 layers (Host and Application layers)
+are encapsulated for applications or other operating systems. So, I focus more on the top layers,
+more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit App.
+&lt;img alt="" src="http://" /&gt;
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;The attributes in a GATT server are grouped into services, each of which can contain zero or more characteristics. These characteristics, in turn, can include zero or more descriptors.&lt;/p&gt;
+&lt;p&gt;P8 illustrates an instance of the HRS on a fictitious server. This would not be the only service contained in the server, so you can see this as a partial slice of the complete set of attributes that a client could access. And everything in BLE Protocol, like service, characteristics and descriptor, is located by a UUID (16bits or 128bits).&lt;/p&gt;
+&lt;p&gt;So, communication between Mi band and Mi Fit App is using many UUIDs so that there won’t be much useful information by sniffing BLE data. And what I did is combining sniffing and reversing engineer to analyze the processing of communication.&lt;/p&gt;
+&lt;h3&gt;Analyze Mi band communication protocol&lt;/h3&gt;
+&lt;p&gt;&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;First of all, let’s see how many services and characteristics MI Fit App has.
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;From P9, we can see there are 6 services 0x1800, 0x1801, 0xfee0, 0xfee1, 0xfee7 and 0x1802. And 3 of them, 0x1800, 0x1801 and 0x1802, have been approved by Bluetooth SIG (Special Interest Group), which means they have specific meanings and we can find them on &lt;a href="https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx"&gt;BLE Services&lt;/a&gt;. So, services 0xfee0, 0xfee1, 0xfee7 are customized by the Vendor and only they know the meaning of every UUID.&lt;/p&gt;
+&lt;p&gt;As for characteristics, there are over 20 characteristics and most of them belong to 0xfee0 service. The rest 2 services, 0xfee1 and 0xfee7, are not realized in Mi Fit App. Maybe the vendor will complete them in the following version.&lt;/p&gt;
+&lt;p&gt;Table 2 shows the meaning of every characteristic in 0xfee0 service.
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;If I get data 0xff02 and its value is 60-09-4d-49, how to explain this? In fact, every value has its specific definition.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0xff01, DEVICE_INFO&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;The length of value is 16 bytes.
+- Byte[0-3] --&amp;gt; device ID
+- Byte[4-7] --&amp;gt; profile version
+- Byte[8-9] --&amp;gt; feature
+- Byte[10-11] --&amp;gt; appearance
+- Byte[12-13] --&amp;gt; hardware version
+- Byte[14-15] --&amp;gt; firmware version&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff02, DEVICE_NAME&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hex to String&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff03, NOTIFICATION&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Mi Fit App gets descriptor 0x2902, but I can’t figure out what it’ll do next. Maybe it’s used for notifying when the band have new data to upload.&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff04, USER_INFO&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;(get data from Mi cloud)
+- Byte[0-3] --&amp;gt; user ID
+- Byte[4] --&amp;gt; gender (0:female, 1:male)
+- Byte[5] --&amp;gt; age
+- Byte[6] --&amp;gt; height
+- Byte[7] --&amp;gt; weight
+- Byte[8-11] --&amp;gt; alias&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff05, CONTROL_POINT&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Factory reset --&amp;gt; write 9 to control point&lt;/li&gt;
+&lt;li&gt;Reboot --&amp;gt; write 12&lt;/li&gt;
+&lt;li&gt;Send notification --&amp;gt; write 8 and xxx&lt;/li&gt;
+&lt;li&gt;Stop motor vibrate --&amp;gt; write 19&lt;/li&gt;
+&lt;li&gt;Sync --&amp;gt; write 11&lt;/li&gt;
+&lt;li&gt;Stop sync data --&amp;gt; write 17&lt;/li&gt;
+&lt;li&gt;Get sensor data --&amp;gt; 18 and 1 --&amp;gt; enable --&amp;gt; 18 and 0 --&amp;gt; diable&lt;/li&gt;
+&lt;li&gt;Get activities --&amp;gt; write 6&lt;/li&gt;
+&lt;li&gt;Send firmware info --&amp;gt; write 7 and info&lt;/li&gt;
+&lt;li&gt;Set color theme --&amp;gt; Write 14, R, G, B, D to Characteristic 0xFF05 (CONTROL_POINT). Where R, G, B, is a byte representing red, green blue value and D is 0 (don't flash) or 1 (quickly flash Color).&lt;/li&gt;
+&lt;li&gt;Set goal --&amp;gt; write 5 and goal&lt;/li&gt;
+&lt;li&gt;Set real time steps --&amp;gt; write 16 and steps (2 bytes)&lt;/li&gt;
+&lt;li&gt;Set time --&amp;gt; write 4 and times (12 bytes)&lt;/li&gt;
+&lt;li&gt;Set wear location --&amp;gt; write 15 and 1 para(left , right or neck)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff06, REALTIME_STEPS&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hex --&amp;gt; Int&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff07, ACTIVITY_DATA&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Byte[0] --&amp;gt; category (126 --&amp;gt; run)&lt;/li&gt;
+&lt;li&gt;Byte[1] --&amp;gt; intensity&lt;/li&gt;
+&lt;li&gt;Byte[2] --&amp;gt; steps&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff08, FIRMWARE_DATA&lt;/strong&gt;
+I can’t figure out&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0xff09, LE_PARAMS&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;- connIntMin: 0xffff &amp;amp; (0xff &amp;amp; byte[0]&lt;/th&gt;
+&lt;th&gt;(0xff &amp;amp; byte[1]) &amp;lt;&amp;lt; 8)&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;- latency:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[4]&lt;/td&gt;
+&lt;td&gt;(0xff &amp;amp; byte[5]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- timeout:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[6]&lt;/td&gt;
+&lt;td&gt;(0xff &amp;amp; byte[7]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- connInt:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[8]&lt;/td&gt;
+&lt;td&gt;(0xff &amp;amp; byte[9]) &amp;lt;&amp;lt; 8)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- advInt:&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;- 0xffff &amp;amp; (0xff &amp;amp; byte[10]&lt;/td&gt;
+&lt;td&gt;(0xff &amp;amp; byte[11]) &amp;lt;&amp;lt; 8).&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff0a, DATE_TIME&lt;/strong&gt;
+12 bytes, Year-month-day-hour-minute-second- Year-month-day-hour-minute-second
+The first one is Gregorian and the second one is lunar.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;0xff0b, STATISTICS&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Byte[0] --&amp;gt; wake (ms)&lt;/li&gt;
+&lt;li&gt;Byte[1] --&amp;gt; vibrate (ms)&lt;/li&gt;
+&lt;li&gt;Byte[2] --&amp;gt; light (ms)&lt;/li&gt;
+&lt;li&gt;Byte[3] --&amp;gt; conn (s)&lt;/li&gt;
+&lt;li&gt;Byte[4] --&amp;gt; adv (s)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff0c, BATTERY&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Byte[0] --&amp;gt; level in%&lt;/li&gt;
+&lt;li&gt;Byte[1-6] --&amp;gt; year (should plus 2000) -month-day-hour-minute-second&lt;/li&gt;
+&lt;li&gt;Byte[7-8] --&amp;gt; charge times&lt;/li&gt;
+&lt;li&gt;Byte[9] --&amp;gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff0d, TEST&lt;/strong&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Write 2 to Characteristic 0xFF0D (TEST). Your Mi Band will do crazy things (LED flashing,vibrate)&lt;/li&gt;
+&lt;li&gt;Write 1 to Characteristic 0xFF0D (TEST) --&amp;gt; disconnect&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;0xff0e, SENSOR_DATA&lt;/strong&gt;
+I can’t figure out the meaning.&lt;/p&gt;
+&lt;p&gt;Now, I know every UUID’s meaning and I can analyze the sniffed BLE data.
+&lt;img alt="" src="http://" /&gt;
+&lt;img alt="" src="http://" /&gt;&lt;/p&gt;
+&lt;p&gt;We can see the Master (Android phone) want to read the data in handle 0x002c. According to P9,it’s between 0x0010 and 0x0039. So the service Master wanted is 0xffe0. Finally, we can locate the exact characteristic by 0x002c in appendix. It’s 0xff0c, which means the Master wants information about battery.&lt;/p&gt;
+&lt;p&gt;From the bottom part, we know the value is 5b-0f-0a-1a-06-04-3b-11-00-04 and we can refer to the meaning of battery I mentioned before:
+- Byte[0] --&amp;gt; level in%
+- Byte[1-6] --&amp;gt; year (should plus 2000) -month-day-hour-minute-second
+- Byte[7-8] --&amp;gt; charge times
+- Byte[9] --&amp;gt; status (1 = Battery low, 2 = Battery charging, 3 = Battery full (charging), 4 = Not charging)&lt;/p&gt;
+&lt;p&gt;Finally, this value shows that it’s remaining 91% power, last charged time is 2015-10-26-6h-04min-59s, it has been charged 11 times and the status is not charging.&lt;/p&gt;
+&lt;h2&gt;Appendix&lt;/h2&gt;
+&lt;p&gt;[CON][88:0F:10:DA:5A:39][LE]&amp;gt;
+handle: 0x0002, char properties: 0x02, char value handle: 0x0003, uuid: 00002a00-0000-1000-8000-00805f9b34fb
+handle: 0x0004, char properties: 0x02, char value handle: 0x0005, uuid: 00002a01-0000-1000-8000-00805f9b34fb
+handle: 0x0006, char properties: 0x0a, char value handle: 0x0007, uuid: 00002a02-0000-1000-8000-00805f9b34fb
+handle: 0x0008, char properties: 0x02, char value handle: 0x0009, uuid: 00002a04-0000-1000-8000-00805f9b34fb
+handle: 0x000d, char properties: 0x22, char value handle: 0x000e, uuid: 00002a05-0000-1000-8000-00805f9b34fb
+handle: 0x0011, char properties: 0x02, char value handle: 0x0012, uuid: 0000ff01-0000-1000-8000-00805f9b34fb
+handle: 0x0013, char properties: 0x0a, char value handle: 0x0014, uuid: 0000ff02-0000-1000-8000-00805f9b34fb
+handle: 0x0015, char properties: 0x12, char value handle: 0x0016, uuid: 0000ff03-0000-1000-8000-00805f9b34fb
+handle: 0x0018, char properties: 0x0a, char value handle: 0x0019, uuid: 0000ff04-0000-1000-8000-00805f9b34fb
+handle: 0x001a, char properties: 0x08, char value handle: 0x001b, uuid: 0000ff05-0000-1000-8000-00805f9b34fb
+handle: 0x001c, char properties: 0x12, char value handle: 0x001d, uuid: 0000ff06-0000-1000-8000-00805f9b34fb
+handle: 0x001f, char properties: 0x12, char value handle: 0x0020, uuid: 0000ff07-0000-1000-8000-00805f9b34fb
+handle: 0x0022, char properties: 0x04, char value handle: 0x0023, uuid: 0000ff08-0000-1000-8000-00805f9b34fb
+handle: 0x0024, char properties: 0x1a, char value handle: 0x0025, uuid: 0000ff09-0000-1000-8000-00805f9b34fb
+handle: 0x0027, char properties: 0x0a, char value handle: 0x0028, uuid: 0000ff0a-0000-1000-8000-00805f9b34fb
+handle: 0x0029, char properties: 0x0a, char value handle: 0x002a, uuid: 0000ff0b-0000-1000-8000-00805f9b34fb
+handle: 0x002b, char properties: 0x12, char value handle: 0x002c, uuid: 0000ff0c-0000-1000-8000-00805f9b34fb
+handle: 0x002e, char properties: 0x0a, char value handle: 0x002f, uuid: 0000ff0d-0000-1000-8000-00805f9b34fb
+handle: 0x0030, char properties: 0x1a, char value handle: 0x0031, uuid: 0000ff0e-0000-1000-8000-00805f9b34fb
+handle: 0x0033, char properties: 0x0a, char value handle: 0x0034, uuid: 0000ff0f-0000-1000-8000-00805f9b34fb
+handle: 0x0035, char properties: 0x10, char value handle: 0x0036, uuid: 0000ff10-0000-1000-8000-00805f9b34fb
+handle: 0x0038, char properties: 0x02, char value handle: 0x0039, uuid: 0000fec9-0000-1000-8000-00805f9b34fb
+handle: 0x003b, char properties: 0x08, char value handle: 0x003c, uuid: 0000fedd-0000-1000-8000-00805f9b34fb
+handle: 0x003d, char properties: 0x02, char value handle: 0x003e, uuid: 0000fede-0000-1000-8000-00805f9b34fb
+handle: 0x003f, char properties: 0x02, char value handle: 0x0040, uuid: 0000fedf-0000-1000-8000-00805f9b34fb
+handle: 0x0041, char properties: 0x08, char value handle: 0x0042, uuid: 0000fed0-0000-1000-8000-00805f9b34fb
+handle: 0x0043, char properties: 0x08, char value handle: 0x0044, uuid: 0000fed1-0000-1000-8000-00805f9b34fb
+handle: 0x0045, char properties: 0x02, char value handle: 0x0046, uuid: 0000fed2-0000-1000-8000-00805f9b34fb
+handle: 0x0047, char properties: 0x08, char value handle: 0x0048, uuid: 0000fed3-0000-1000-8000-00805f9b34fb
+handle: 0x004a, char properties: 0x08, char value handle: 0x004b, uuid: 0000fec7-0000-1000-8000-00805f9b34fb
+handle: 0x004c, char properties: 0x22, char value handle: 0x004d, uuid: 0000fec8-0000-1000-8000-00805f9b34fb
+handle: 0x004f, char properties: 0x02, char value handle: 0x0050, uuid: 0000fec9-0000-1000-8000-00805f9b34fb
+handle: 0x0052, char properties: 0x04, char value handle: 0x0053, uuid: 00002a06-0000-1000-8000-00805f9b34fb&lt;/p&gt;</summary><category term="Mi Band"></category></entry></feed>
