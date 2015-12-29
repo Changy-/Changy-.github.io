@@ -56,10 +56,10 @@
 <p>I have used Mi band for 2 months and during this 2 months I analyzed how Bluetooth Low Energy protocol works and how Mi Fit App communicates with Mi band. There are 2 parts in this report. The first part is about data analyze which is recorded by Mi Fit App and the second is about BLE communication.</p>
 <h2>Data analyze</h2>
 <p>Mi Fit App saves all data in /data/data/com.xiaomi.hm.health/, where only Mi Fit itself and root App can reach. So I think it’s not possible for other Apps on Android to steal data, which is mentioned in initial “Draft Scope”. And Mi Fit saves most data in /databases and /shared_prefs.
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:54:09.png?raw=true" /></p>
 <p>In P2, user-db saves user information like name and sports.db saves your running data. And all of these data have been pushed into vendor’s server. When you change the phone or Mi band, the App will download those data from server. In P3, there also are some data like configure file.</p>
 <p><a href="http://forum.xda-developers.com/general/accessories/xiaomi-mi-band-data-extraction-t3019156">Xmxm</a> and his friends have done much to extract, clean and analyze Mi band data. Here, I use their tools to extract and analyze data. P4 shows the statistical chart about sleep and activity and P5 shows data of daily steps.
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:57:41.png?raw=true" /></p>
 <h2>BLE communication</h2>
 <h3>Bluetooth Low Energy Protocol</h3>
 <p>Bluetooth low energy is a wireless personal area network technology designed and marketed by the Bluetooth Special Interest Group aimed at novel applications in the healthcare, fitness, beacons, security, and home entertainment industries.
@@ -69,24 +69,24 @@ Bluetooth Smart (low energy) wireless technology features:
 - Low cost
 - Multi-vendor interoperability
 - Enhanced range</p>
-<p><img alt="" src="http://" /></p>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2016:59:33.png?raw=true" /></p>
 <p>As showed in P6, it looks like TCP/IP Protocol Stack and they are very similar. The bottom 3 layers
 are designed for hardware, paired and encryption. The top 4 layers (Host and Application layers)
 are encapsulated for applications or other operating systems. So, I focus more on the top layers,
 more precisely on GATT server, in analyzing how Mi band communicates with Mi Fit App.
-<img alt="" src="http://" />
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:00:42.png?raw=true" />
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:01:09.png?raw=true" /></p>
 <p>The attributes in a GATT server are grouped into services, each of which can contain zero or more characteristics. These characteristics, in turn, can include zero or more descriptors.</p>
 <p>P8 illustrates an instance of the HRS on a fictitious server. This would not be the only service contained in the server, so you can see this as a partial slice of the complete set of attributes that a client could access. And everything in BLE Protocol, like service, characteristics and descriptor, is located by a UUID (16bits or 128bits).</p>
 <p>So, communication between Mi band and Mi Fit App is using many UUIDs so that there won’t be much useful information by sniffing BLE data. And what I did is combining sniffing and reversing engineer to analyze the processing of communication.</p>
 <h3>Analyze Mi band communication protocol</h3>
-<p><img alt="" src="http://" /></p>
+<p><img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:02:52.png?raw=true" /></p>
 <p>First of all, let’s see how many services and characteristics MI Fit App has.
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:03:44.png?raw=true" /></p>
 <p>From P9, we can see there are 6 services 0x1800, 0x1801, 0xfee0, 0xfee1, 0xfee7 and 0x1802. And 3 of them, 0x1800, 0x1801 and 0x1802, have been approved by Bluetooth SIG (Special Interest Group), which means they have specific meanings and we can find them on <a href="https://developer.bluetooth.org/gatt/services/Pages/ServicesHome.aspx">BLE Services</a>. So, services 0xfee0, 0xfee1, 0xfee7 are customized by the Vendor and only they know the meaning of every UUID.</p>
 <p>As for characteristics, there are over 20 characteristics and most of them belong to 0xfee0 service. The rest 2 services, 0xfee1 and 0xfee7, are not realized in Mi Fit App. Maybe the vendor will complete them in the following version.</p>
 <p>Table 2 shows the meaning of every characteristic in 0xfee0 service.
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:05:51.png?raw=true" /></p>
 <p>If I get data 0xff02 and its value is 60-09-4d-49, how to explain this? In fact, every value has its specific definition.</p>
 <p><strong>0xff01, DEVICE_INFO</strong></p>
 <blockquote>
@@ -226,8 +226,8 @@ The first one is Gregorian and the second one is lunar.</p>
 <p><strong>0xff0e, SENSOR_DATA</strong>
 I can’t figure out the meaning.</p>
 <p>Now, I know every UUID’s meaning and I can analyze the sniffed BLE data.
-<img alt="" src="http://" />
-<img alt="" src="http://" /></p>
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:20:42.png?raw=true" />
+<img alt="" src="https://github.com/Changy-/Changy-.github.io/blob/master/images/Screenshot%20from%202015-12-29%2017:22:49.png?raw=true" /></p>
 <p>We can see the Master (Android phone) want to read the data in handle 0x002c. According to P9,it’s between 0x0010 and 0x0039. So the service Master wanted is 0xffe0. Finally, we can locate the exact characteristic by 0x002c in appendix. It’s 0xff0c, which means the Master wants information about battery.</p>
 <p>From the bottom part, we know the value is 5b-0f-0a-1a-06-04-3b-11-00-04 and we can refer to the meaning of battery I mentioned before:
 - Byte[0] --&gt; level in%
