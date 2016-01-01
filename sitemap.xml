@@ -5,28 +5,28 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://changy-.github.io/</loc>
-<lastmod>2015-12-29T18:12:11-00:00</lastmod>
+<lastmod>2015-12-31T21:44:57-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/archives.html</loc>
-<lastmod>2015-12-29T18:12:11-00:00</lastmod>
+<lastmod>2015-12-31T21:44:57-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/tags.html</loc>
-<lastmod>2015-12-29T18:12:11-00:00</lastmod>
+<lastmod>2015-12-31T21:44:57-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
 
 <url>
 <loc>http://changy-.github.io/categories.html</loc>
-<lastmod>2015-12-29T18:12:11-00:00</lastmod>
+<lastmod>2015-12-31T21:44:57-00:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
@@ -41,6 +41,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://changy-.github.io/articles/just_try.html</loc>
 <lastmod>2015-08-28T15:35:00-04:00</lastmod>
+<changefreq>daily</changefreq>
+<priority>1</priority>
+</url>
+
+<url>
+<loc>http://changy-.github.io/articles/cheng-xu-de-jie-gou.html</loc>
+<lastmod>2015-12-31T21:42:00-05:00</lastmod>
 <changefreq>daily</changefreq>
 <priority>1</priority>
 </url>
@@ -103,7 +110,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://changy-.github.io/category/os.html</loc>
-<lastmod>2015-12-27T17:07:00-04:56</lastmod>
+<lastmod>2015-12-31T21:42:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
@@ -132,6 +139,13 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 <url>
 <loc>http://changy-.github.io/tag/mi-band.html</loc>
 <lastmod>2015-12-28T21:43:00-04:56</lastmod>
+<changefreq>daily</changefreq>
+<priority>0.8</priority>
+</url>
+
+<url>
+<loc>http://changy-.github.io/tag/system-data-bss.html</loc>
+<lastmod>2015-12-31T21:42:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>
@@ -173,7 +187,7 @@ xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 
 <url>
 <loc>http://changy-.github.io/author/changy.html</loc>
-<lastmod>2015-12-28T21:43:00-04:56</lastmod>
+<lastmod>2015-12-31T21:42:00-04:56</lastmod>
 <changefreq>daily</changefreq>
 <priority>0.8</priority>
 </url>

@@ -1,5 +1,66 @@
 <?xml version="1.0" encoding="utf-8"?>
-<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/all.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-12-28T21:43:00-05:00</updated><entry><title>Xiao Mi band protocol analyze</title><link href="http://changy-.github.io/articles/xiao-mi-band-protocol-analyze.html" rel="alternate"></link><updated>2015-12-28T21:43:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-28:articles/xiao-mi-band-protocol-analyze.html</id><summary type="html">&lt;h1&gt;Xiao Mi band protocol analyze&lt;/h1&gt;
+<feed xmlns="http://www.w3.org/2005/Atom"><title>Process</title><link href="http://changy-.github.io/" rel="alternate"></link><link href="http://changy-.github.io/feeds/all.atom.xml" rel="self"></link><id>http://changy-.github.io/</id><updated>2015-12-31T21:42:00-05:00</updated><entry><title>程序的结构</title><link href="http://changy-.github.io/articles/cheng-xu-de-jie-gou.html" rel="alternate"></link><updated>2015-12-31T21:42:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-31:articles/cheng-xu-de-jie-gou.html</id><summary type="html">&lt;h1&gt;程序的结构&lt;/h1&gt;
+&lt;p&gt;要用到的c代码,文件名就是main.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;&lt;span class="cp"&gt;#include &amp;lt;stdio.h&amp;gt;&lt;/span&gt;
+&lt;span class="cp"&gt;#include &amp;lt;stdlib.h&amp;gt;&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;i&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+
+&lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="nf"&gt;main&lt;/span&gt;&lt;span class="p"&gt;(){&lt;/span&gt;
+    &lt;span class="kt"&gt;int&lt;/span&gt; &lt;span class="n"&gt;j&lt;/span&gt; &lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+    &lt;span class="n"&gt;printf&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;Hello,World&lt;/span&gt;&lt;span class="se"&gt;\n&lt;/span&gt;&lt;span class="s"&gt;&amp;quot;&lt;/span&gt; &lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="n"&gt;x&lt;/span&gt;&lt;span class="o"&gt;=&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt; &lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="n"&gt;malloc&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="k"&gt;sizeof&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="kt"&gt;char&lt;/span&gt;&lt;span class="p"&gt;)&lt;/span&gt;&lt;span class="o"&gt;*&lt;/span&gt;&lt;span class="mi"&gt;100&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;while&lt;/span&gt;&lt;span class="p"&gt;(&lt;/span&gt;&lt;span class="mi"&gt;1&lt;/span&gt;&lt;span class="p"&gt;);&lt;/span&gt;
+    &lt;span class="k"&gt;return&lt;/span&gt; &lt;span class="mi"&gt;0&lt;/span&gt;&lt;span class="p"&gt;;&lt;/span&gt;
+&lt;span class="p"&gt;}&lt;/span&gt;
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;首先看看进程的结构,有code,data和bss 这3大部分.&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;changy@K29:~/Desktop/linux$ size main
+   text    data     bss     dec     hex filename
+   1303     568       8    1879     757 main
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;如果删除&lt;code&gt;int j =0;&lt;/code&gt;这行代码&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;changy@K29:~/Desktop/linux$ size main
+   text    data     bss     dec     hex filename
+   1287     568       8    1863     747 main
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;text部分有改变(按理来说应该是减少4个字节,怎么变成16个字节了.....  怪异)&lt;/p&gt;
+&lt;p&gt;查看运行时该进程的PID, 10459&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;changy@K29:~/Desktop/linux$ ps aux|grep ./main
+changy   10459 99.4  0.0   4332   684 pts/0    R+   15:26   0:13 ./main
+changy   10529  0.0  0.0  15944  2268 pts/3    S+   15:26   0:00 grep --color=auto ./main
+&lt;/pre&gt;&lt;/div&gt;
+
+
+&lt;p&gt;更进一步的查看该进程的信息, ID含义是起始地址和结束地址,权限,偏移地址,主次设备(驱动),inode(文件).
+可以看到该进程使用了2个c的库文件. 还有一些定义不太清楚,后面应该还会遇到&lt;/p&gt;
+&lt;div class="highlight"&gt;&lt;pre&gt;changy@K29:~/Desktop/linux$ cat /proc/10459/maps
+00400000-00401000 r-xp 00000000 08:17 9702313                        /home/changy/Desktop/linux/main
+00600000-00601000 r--p 00000000 08:17 9702313                        /home/changy/Desktop/linux/main
+00601000-00602000 rw-p 00001000 08:17 9702313                        /home/changy/Desktop/linux/main
+00c29000-00c4a000 rw-p 00000000 00:00 0                              [heap]
+7f8785d6e000-7f8785f29000 r-xp 00000000 08:02 3936432                /lib/x86_64-linux-gnu/libc-2.19.so
+7f8785f29000-7f8786128000 ---p 001bb000 08:02 3936432                /lib/x86_64-linux-gnu/libc-2.19.so
+7f8786128000-7f878612c000 r--p 001ba000 08:02 3936432                /lib/x86_64-linux-gnu/libc-2.19.so
+7f878612c000-7f878612e000 rw-p 001be000 08:02 3936432                /lib/x86_64-linux-gnu/libc-2.19.so
+7f878612e000-7f8786133000 rw-p 00000000 00:00 0 
+7f8786133000-7f8786156000 r-xp 00000000 08:02 3936408                /lib/x86_64-linux-gnu/ld-2.19.so
+7f8786335000-7f8786338000 rw-p 00000000 00:00 0 
+7f8786352000-7f8786355000 rw-p 00000000 00:00 0 
+7f8786355000-7f8786356000 r--p 00022000 08:02 3936408                /lib/x86_64-linux-gnu/ld-2.19.so
+7f8786356000-7f8786357000 rw-p 00023000 08:02 3936408                /lib/x86_64-linux-gnu/ld-2.19.so
+7f8786357000-7f8786358000 rw-p 00000000 00:00 0 
+7ffcf8a1f000-7ffcf8a40000 rw-p 00000000 00:00 0                      [stack]
+7ffcf8bde000-7ffcf8be0000 r--p 00000000 00:00 0                      [vvar]
+7ffcf8be0000-7ffcf8be2000 r-xp 00000000 00:00 0                      [vdso]
+ffffffffff600000-ffffffffff601000 r-xp 00000000 00:00 0              [vsyscall]
+&lt;/pre&gt;&lt;/div&gt;</summary><category term="system data bss"></category></entry><entry><title>Xiao Mi band protocol analyze</title><link href="http://changy-.github.io/articles/xiao-mi-band-protocol-analyze.html" rel="alternate"></link><updated>2015-12-28T21:43:00-05:00</updated><author><name>Changy</name></author><id>tag:changy-.github.io,2015-12-28:articles/xiao-mi-band-protocol-analyze.html</id><summary type="html">&lt;h1&gt;Xiao Mi band protocol analyze&lt;/h1&gt;
 &lt;p&gt;I have used Mi band for 2 months and during this 2 months I analyzed how Bluetooth Low Energy protocol works and how Mi Fit App communicates with Mi band. There are 2 parts in this report. The first part is about data analyze which is recorded by Mi Fit App and the second is about BLE communication.&lt;/p&gt;
 &lt;h2&gt;Data analyze&lt;/h2&gt;
 &lt;p&gt;Mi Fit App saves all data in /data/data/com.xiaomi.hm.health/, where only Mi Fit itself and root App can reach. So I think it’s not possible for other Apps on Android to steal data, which is mentioned in initial “Draft Scope”. And Mi Fit saves most data in /databases and /shared_prefs.
